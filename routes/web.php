@@ -14,15 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/uuid', function () {
-    dd(auth()->user());
-})->middleware(['auth', 'verified']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::group(['prefix' => 'applications'], function () {
+        Route::get('/', [App\Http\Controllers\ApplicationController::class, 'index'])->name('applications.index');
+    });
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+    });
+
+});
 
 require __DIR__.'/auth.php';

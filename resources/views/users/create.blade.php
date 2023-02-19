@@ -1,0 +1,52 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Users') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white">
+                    <div class="flex justify-between items-center pb-3">
+                        <h1 class="font-bold text-2xl"> Create User</h1>
+                    </div>
+                </div>
+                <form class="p-6">
+                    <x-forms.text-input title="Name" name="name" placeholder="Ted Mosby" />
+                    <x-forms.text-input title="E-Mail" name="email" placeholder="big.fudge@gnb.com" class="mt-3"/>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white">
+                    <div class="flex justify-between items-center pb-3">
+                        <h1 class="font-bold text-2xl"> Share</h1>
+                    </div>
+                </div>
+                <div class="flex justify-center w-full h-32 p-5">
+                    <div class="w-1/2 border-gray-400 border-2 rounded-lg flex overflow-hidden">
+                        <div class="bg-primary text-white w-1/2 h-full border-r-gray-400 border-r-2 flex-wrap flex justify-center content-center">
+                            <i class="fa-solid fa-link text-3xl"></i>
+                            <h1 class="w-full text-center font-bold text-xl">Share Link</h1>
+                        </div>
+                        <div class="w-1/2 h-full flex-wrap flex justify-center content-center">
+                            <i class="fa-solid fa-envelope text-3xl"></i>
+                            <h1 class="w-full text-center font-bold text-xl">Send E-Mail</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 w-full flex justify-center content-center items-center">
+                    <div class="rounded-md border-2 border-black flex justify-center items-center w-5/6 overflow-hidden">
+                        <input value="http://localhost/register?uuid=ae786b45-89a6-4de7-93c5-4e1db106a1f5&signature=44a7157b6808e89cafa476adf427acf419fb4f3389860844a9b8d3e90bb982eb" type="text" disabled class="placeholder:text-gray-400 p-2 border-none w-full">
+                        <span class="cursor-pointer px-2 border-l-2 border-l-black" onclick="navigator.clipboard.writeText('http://localhost/register?uuid=ae786b45-89a6-4de7-93c5-4e1db106a1f5&signature=44a7157b6808e89cafa476adf427acf419fb4f3389860844a9b8d3e90bb982eb')">
+                            <i class="fa-solid fa-copy text-2xl"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

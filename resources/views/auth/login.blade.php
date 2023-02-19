@@ -1,15 +1,38 @@
 <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+        <div class="flex w-screen">
+            <div class="w-screen overflow-hidden bg-white min-h-screen md:w-1/3">
+                <div class="mt-10 w-full flex justify-center flex-wrap">
+                    <x-application-logo class="w-20 h-20 fill-current text-primary"/>
+                </div>
+                <form class="w-full p-6" method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <label>
+                        <span class="text-black">E-Mail</span>
+                        <div class="flex w-full rounded-lg overflow-hidden border-2 border-black  content-center items-center">
+                            <i class="fa-solid fa-user text-xl px-2 text-gray-300"></i>
+                            <input name="email" type="email" class="w-full bg-white border-none placeholder:text-gray-300" placeholder="big.fudge@gnb.com">
+                        </div>
+                    </label>
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <label class="block mt-3">
+                        <span class="text-black mt-3">Password</span>
+                        <div class="flex w-full rounded-lg overflow-hidden border-2 border-black content-center items-center">
+                            <i class="fa-solid fa-lock text-xl px-2 text-gray-300"></i>
+                            <input name="password" type="password" class="w-full bg-white border-none placeholder:text-gray-300" placeholder="**********">
+                        </div>
+                    </label>
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    <button type="submit" class="w-full bg-primary text-white mt-10 p-2">Log In</button>
+                    <span class="mt-2 inline-block text-black">Forgot your password?</span>
+                </form>
+            </div>
+            <div class="hidden md:block w-2/3 h-screen bg-primary">
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+            </div>
+        </div>
 
-        <form method="POST" action="{{ route('login') }}">
+
+        {{--<form method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
@@ -52,6 +75,5 @@
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
-        </form>
-    </x-auth-card>
+        </form>--}}
 </x-guest-layout>
