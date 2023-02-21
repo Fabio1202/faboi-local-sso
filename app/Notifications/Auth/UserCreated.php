@@ -3,7 +3,6 @@
 namespace App\Notifications\Auth;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\URL;
@@ -46,7 +45,7 @@ class UserCreated extends Notification
         return (new MailMessage)
             ->greeting('Hello!')
                     ->line('Für dich wurde ein Account im Faboi System erstellt. Bitte klicke auf den Button um deinen Account einzurichten!')
-                    ->action('Click to activate', URL::signedRoute("register", ["uuid" => $this->user->uuid]));
+                    ->action('Click to activate', URL::signedRoute('register', ['uuid' => $this->user->uuid]));
     }
 
     /**

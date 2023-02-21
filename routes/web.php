@@ -30,7 +30,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
         Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
     });
-
 });
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,5 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
@@ -50,4 +51,3 @@ before('deploy:symlink', 'artisan:migrate');
 
 after('deploy:vendors', 'npm:install');
 after('npm:install', 'npm:run');
-

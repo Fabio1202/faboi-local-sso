@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         parent::boot();
 
         static::creating(function ($model) {
-            if (Schema::hasColumn("users", "uuid")) {
+            if (Schema::hasColumn('users', 'uuid')) {
                 $model->uuid = Str::uuid();
             }
         });
@@ -58,14 +58,14 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the roles for the user.
      */
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany(\App\Models\Role::class)->withTimestamps();
     }
 
     /**
      * Check if the user has a role.
      *
-     * @param string $role
      * @return bool
      */
     public function hasRole(string $role)

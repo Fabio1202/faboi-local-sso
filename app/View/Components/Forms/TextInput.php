@@ -6,12 +6,14 @@ use Illuminate\View\Component;
 
 class TextInput extends Component
 {
-
     public $name;
+
     public $title;
+
     public $placeholder;
 
     public $type;
+
     /**
      * Create a new component instance.
      *

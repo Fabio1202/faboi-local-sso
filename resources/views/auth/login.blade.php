@@ -23,7 +23,9 @@
                     </label>
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     <button type="submit" class="w-full bg-primary text-white mt-10 p-2">Log In</button>
-                    <span class="mt-2 inline-block text-black">Forgot your password?</span>
+                    <a href="{{ route('password.request') }}">
+                        <span class="mt-2 inline-block text-black">Forgot your password?</span>
+                    </a>
                 </form>
             </div>
             <div class="hidden md:block w-2/3 h-screen bg-primary">

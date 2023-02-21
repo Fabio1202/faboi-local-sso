@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Notifications\Auth\UserCreated;
-use Illuminate\Support\Facades\Notification;
 
 class UserController extends Controller
 {
@@ -12,7 +10,7 @@ class UserController extends Controller
     {
         // Return view with paginated users
         return view('users.view-all', [
-            'users' => User::paginate(20)
+            'users' => User::paginate(20),
         ]);
     }
 

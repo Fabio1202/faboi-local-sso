@@ -6,8 +6,8 @@ use Illuminate\View\Component;
 
 class ListEntry extends Component
 {
-
     public $lastEntry;
+
     /**
      * Create a new component instance.
      *
