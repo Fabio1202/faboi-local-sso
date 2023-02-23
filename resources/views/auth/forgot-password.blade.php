@@ -1,3 +1,16 @@
+<x-auth-layout :title="__('Password reset')">
+    <form class="w-full p-6" method="POST" action="{{ route('password.email') }}">
+        @csrf
+        <x-forms.auth.input-with-icon label="E-Mail" name="email" placeholder="big.fudge@gnb.com" type="email">
+            <i class="fa-solid fa-user text-xl px-2 text-gray-300"></i>
+        </x-forms.auth.input-with-icon>
+        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <button type="submit" class="w-1/3 bg-primary rounded-full font-bold text-white mt-10 p-2">Reset password</button>
+    </form>
+</x-auth-layout>
+
+{{--
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
@@ -33,3 +46,4 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+--}}
