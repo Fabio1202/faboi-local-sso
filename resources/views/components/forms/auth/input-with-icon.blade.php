@@ -1,5 +1,5 @@
 <div>
-    <label>
+    <label {{ $attributes->merge(["class" => "block"]) }}>
         <span class="text-black dark:text-white">{{ $label }}</span>
         <div class="flex w-full rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900 content-center items-center h-12">
             {{ $slot }}
