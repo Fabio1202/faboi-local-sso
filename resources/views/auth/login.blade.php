@@ -5,7 +5,7 @@
             <i class="fa-solid fa-user text-xl px-2 text-gray-300"></i>
         </x-forms.auth.input-with-icon>
         <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        <x-forms.auth.input-with-icon label="Password" name="password" placeholder="********" type="password">
+        <x-forms.auth.input-with-icon label="Password" name="password" placeholder="********" type="password" class="mt-4">
             <i class="fa-solid fa-lock text-xl px-2 text-gray-300"></i>
         </x-forms.auth.input-with-icon>
         <x-input-error :messages="$errors->get('password')" class="mt-2" />
