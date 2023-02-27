@@ -3,6 +3,7 @@
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-if(config('app.env') == 'local') {
+/*if(config('app.env') == 'local') {
     Route::get('/test-auth-screen', function () {
         return view('vendor.passport.authorize', [
             'client' =>  new Client([
@@ -40,7 +41,14 @@ if(config('app.env') == 'local') {
             'authToken' => 'test-token',
         ]);
     });
-}
+}*/
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/register', function () {
+        return view('auth.register');
+    })->name('register')->middleware('signed');
+    Route::post('/register', [\Laravel\Fortify\Http\Controllers\RegisteredUserController::class, 'store'])->name('register.post');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -54,6 +62,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{application:id}', [App\Http\Controllers\ApplicationController::class, 'show'])->name('applications.show');
         Route::get('/{application}/clients/create', [App\Http\Controllers\ClientController::class, 'create'])->name('clients.create');
     });
+
+    // ONLY FOR TESTING IN LOCAL ENVIRONMENT
+    if(config("app.env") == "local") {
+        Route::get("/registerLink", function () {
+            return URL::signedRoute("register");
+        })->name("registerLink");
+    }
+
 
     Route::group(['prefix' => 'clients'], function () {
         Route::post('/', [App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');

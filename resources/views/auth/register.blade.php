@@ -1,3 +1,31 @@
+<x-auth-layout title="Register">
+    <x-slot name="image">
+
+    </x-slot>
+
+    <form class="w-full p-6" action="{{ route('register.post') }}" method="POST">
+        @csrf
+        <x-forms.auth.input-with-icon placeholder="Harvey Specter" label="Name" name="name" >
+            <i class="fa-solid fa-user text-xl px-2 text-gray-300"></i>
+        </x-forms.auth.input-with-icon>
+        <x-input-error :messages="old('name')" class="mt-2" />
+        <x-forms.auth.input-with-icon placeholder="specter@pearson-specter-litt.com" label="Email" name="email" type="email" class="mt-3">
+            <i class="fa-solid fa-envelope text-xl px-2 text-gray-300"></i>
+        </x-forms.auth.input-with-icon>
+        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <x-forms.auth.input-with-icon placeholder="********" label="Password" name="password" type="password" class="mt-3">
+            <i class="fa-solid fa-lock text-xl px-2 text-gray-300"></i>
+        </x-forms.auth.input-with-icon>
+        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <x-forms.auth.input-with-icon placeholder="********" label="Confirm Password" name="password_confirmation" type="password" class="mt-3">
+            <i class="fa-solid fa-lock text-xl px-2 text-gray-300"></i>
+        </x-forms.auth.input-with-icon>
+        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <button type="submit" class="w-1/3 bg-primary rounded-full font-bold text-white mt-10 p-2">Register</button>
+    </form>
+</x-auth-layout>
+
+{{--
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
@@ -62,3 +90,4 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+--}}

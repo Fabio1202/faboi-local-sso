@@ -24,9 +24,15 @@
                         @endslot
 
                         @slot("actions")
-                            <span class="text-green-600">
-                                    Activated
-                                </span>
+                                @if($user->email_verified_at == null)
+                                    <span class="text-yellow-600">
+                                        Verification sent
+                                    </span>
+                                @else
+                                    <span class="text-green-600">
+                                        Activated
+                                    </span>
+                                @endif
                             <a class="text-lg ml-3" href="#">
                                 <i class="fa-solid fa-pen-to-square text-2xl"></i>
                             </a>
