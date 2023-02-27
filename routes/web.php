@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Client;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,29 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+
+if(config('app.env') == 'local') {
+    Route::get('/test-auth-screen', function () {
+        return view('vendor.passport.authorize', [
+            'client' =>  new Client([
+                'name' => 'Test Client',
+                'redirect' => 'http://localhost:8000/callback',
+                'id' => 1,
+                'application' => \App\Models\Application::first(),
+            ]),
+            'scopes' => [],
+            'user' => User::find(1),
+            'request' => new \Illuminate\Http\Request([
+                'client_id' => 1,
+                'redirect_uri' => 'http://localhost:8000/callback',
+                'response_type' => 'code',
+                'scope' => '',
+                'state' => ''
+            ]),
+            'authToken' => 'test-token',
+        ]);
+    });
+}
 
 Route::get('/dashboard', function () {
     return view('dashboard');
