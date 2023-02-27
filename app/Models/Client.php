@@ -11,6 +11,10 @@ class Client extends BaseClient
      */
     public function skipsAuthorization(): bool
     {
-        return true;
+        return $this->firstParty() || $this->application->first_party;
+    }
+
+    public function application() {
+        return $this->belongsTo(Application::class);
     }
 }

@@ -14,6 +14,9 @@
             <span class="mt-4 inline-block text-black dark:text-white w-full">Forgot your password?</span>
         </a>
     </form>
+    <x-slot name="image">
+        <img alt="" src="{{ asset('img/Fingerprint-Authentication.svg') }}" class="w-2/3 object-cover">
+    </x-slot>
 </x-auth-layout>
         {{--<form method="POST" action="{{ route('login') }}">
             @csrf

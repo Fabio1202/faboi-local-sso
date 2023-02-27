@@ -4,7 +4,7 @@ namespace App\View\Components\Forms;
 
 use Illuminate\View\Component;
 
-class TextInput extends Component
+class TextAreaInput extends Component
 {
     public $name;
 
@@ -12,7 +12,7 @@ class TextInput extends Component
 
     public $placeholder;
 
-    public $type;
+    public $preventNewLines = false;
 
     public $value;
 
@@ -21,12 +21,12 @@ class TextInput extends Component
      *
      * @return void
      */
-    public function __construct($name, $title, $placeholder = null, $type = 'text', $value = "")
+    public function __construct($name, $title, $placeholder = null, $preventNewLines = false, $value = '')
     {
         $this->name = $name;
         $this->title = $title;
         $this->placeholder = $placeholder;
-        $this->type = $type;
+        $this->preventNewLines = $preventNewLines;
         $this->value = $value;
     }
 
@@ -37,6 +37,6 @@ class TextInput extends Component
      */
     public function render()
     {
-        return view('components.forms.text-input');
+        return view('components.forms.text-area-input');
     }
 }

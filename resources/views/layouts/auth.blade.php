@@ -8,7 +8,7 @@
             {{ $slot }}
         </div>
         <div class="hidden md:flex w-3/5 h-screen justify-center items-center content-center bg-gray-100 dark:bg-gray-900">
-            <img alt="" src="{{ asset('img/Fingerprint-Authentication.svg') }}" class="w-2/3 object-cover">
+            {{ $image }}
         </div>
     </div>
 </x-guest-layout>

@@ -1,6 +1,6 @@
 <div {{ $attributes }}>
     <label>
-        <span class="text-gray-700">{{ $title }}</span>
-        <input type="{{ isset($type) ? $type : "text" }}" name="{{ $name }}" placeholder="{{ isset($placeholder) ? $placeholder : "" }}" class="placeholder:text-gray-400 p-2 rounded-lg w-full">
+        <span class="text-gray-700 dark:text-white">{{ $title }}</span>
+        <input type="{{ isset($type) ? $type : "text" }}" name="{{ $name }}" placeholder="{{ isset($placeholder) ? $placeholder : "" }}" value="{{ $value }}" class="placeholder:text-gray-400 border-none rounded-md bg-gray-200 dark:bg-gray-700 w-full">
     </label>
 </div>

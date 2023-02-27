@@ -24,6 +24,15 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'applications'], function () {
         Route::get('/', [App\Http\Controllers\ApplicationController::class, 'index'])->name('applications.index');
+        Route::get('/create', [App\Http\Controllers\ApplicationController::class, 'create'])->name('applications.create');
+        Route::post('/', [App\Http\Controllers\ApplicationController::class, 'store'])->name('applications.store');
+        Route::get('/{application:id}', [App\Http\Controllers\ApplicationController::class, 'show'])->name('applications.show');
+        Route::get('/{application}/clients/create', [App\Http\Controllers\ClientController::class, 'create'])->name('clients.create');
+    });
+
+    Route::group(['prefix' => 'clients'], function () {
+        Route::post('/', [App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');
+        Route::delete('/{client}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('clients.destroy')->middleware('password.confirm');
     });
 
     Route::group(['prefix' => 'users'], function () {

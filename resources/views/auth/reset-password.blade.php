@@ -2,7 +2,7 @@
     <form class="w-full p-6" method="POST" action="{{ route('password.update') }}">
         @csrf
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
-        <x-forms.auth.input-with-icon label="E-Mail" name="email" placeholder="lily@ahoi.com" type="email">
+        <x-forms.auth.input-with-icon label="E-Mail" name="email" placeholder="robin@sparkles.com" type="email">
             <i class="fa-solid fa-user text-xl px-2 text-gray-300"></i>
         </x-forms.auth.input-with-icon>
         <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -16,6 +16,9 @@
         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         <button type="submit" class="w-1/3 bg-primary rounded-full font-bold text-white mt-10 p-2">Update Password</button>
     </form>
+    <x-slot name="image">
+        <img alt="" src="{{ asset('img/Sand-castle.svg') }}" class="w-2/3 object-cover">
+    </x-slot>
 </x-auth-layout>
 
 {{--

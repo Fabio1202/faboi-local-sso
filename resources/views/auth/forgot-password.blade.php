@@ -8,6 +8,9 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
         <button type="submit" class="w-1/3 bg-primary rounded-full font-bold text-white mt-10 p-2">Reset password</button>
     </form>
+    <x-slot name="image">
+        <img alt="" src="{{ asset('img/Fingerprint-Authentication.svg') }}" class="w-2/3 object-cover">
+    </x-slot>
 </x-auth-layout>
 
 {{--
