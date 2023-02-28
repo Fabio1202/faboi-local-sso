@@ -21,7 +21,7 @@ class ApplicationController extends Controller
         Gate::authorize('view', $application);
         // Show application details
         return view('applications.show', [
-            'application' => $application,
+            'application' => $application->load('clients', 'permissionGroups')
         ]);
     }
 
@@ -30,9 +30,12 @@ class ApplicationController extends Controller
             'name' => 'required',
             'description' => 'string|nullable',
             'first_party' => '',
+            'uses_role_system' => ''
         ]);
 
         $req['first_party'] = ($req['first_party'] ?? "") == 'on';
+
+        $req['uses_role_system'] = ($req['uses_role_system'] ?? "") == 'on';
 
         $req["owner_id"] = auth()->user()->id;
 

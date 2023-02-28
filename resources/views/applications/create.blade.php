@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot:header>
+    <x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
             {{ __('Applications') }}
         </h2>
-    </x-slot:header>
+    </x-slot>
 
     <div class="py-12">
         <x-card-view>
@@ -19,6 +19,11 @@
                     <span class="inline-block ml-3">First Party Application</span>
                 </label>
                 <x-input-error :messages="$errors->get('first_party')"></x-input-error>
+                <label class="flex content-center items-center mt-3">
+                    <input {{ old('uses_role_system') == "on" ? "checked" : "" }} type="checkbox" class="h-8 w-8 bg-gray-200 dark:bg-gray-700 border-none rounded-md" name="uses_role_system"/>
+                    <span class="inline-block ml-3">Uses Role System</span>
+                </label>
+                <x-input-error :messages="$errors->get('uses_role_system')"></x-input-error>
                 <x-forms.primary-button :route="'#'" class="mt-6">Create Application</x-forms.primary-button>
             </form>
         </x-card-view>

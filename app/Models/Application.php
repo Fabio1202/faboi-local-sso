@@ -21,6 +21,20 @@ class Application extends Model
         static::creating(function ($model) {
             $model->id = \Illuminate\Support\Str::uuid();
         });
+
+        static::created(function ($model) {
+            if($model->uses_role_system) {
+                $permGroup = $model->permissionGroups()->create([
+                    'name' => 'Default',
+                    'description' => 'Default permission group',
+                ]);
+                $perm = $permGroup->permissions()->create([
+                    'name' => 'View',
+                    'description' => 'View the application',
+                ]);
+                Role::where('name', 'admin')->first()->permissions()->attach($perm);
+            }
+        });
     }
 
     public function getShortDescriptionAttribute()
@@ -37,5 +51,15 @@ class Application extends Model
     public function clients()
     {
         return $this->hasMany(\App\Models\Client::class);
+    }
+
+    public function permissions()
+    {
+        return $this->hasMany(\App\Models\Permission::class);
+    }
+
+    public function permissionGroups()
+    {
+        return $this->hasMany(\App\Models\PermissionGroup::class);
     }
 }

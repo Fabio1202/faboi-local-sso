@@ -24,6 +24,10 @@
                     <input type="radio" name="type" value="authorization" checked class="h-5 w-5 bg-gray-200 dark:bg-gray-700 border-none">
                     <span class="ml-3 text-lg">Authorization</span>
                 </label>
+                <label class="flex items-center">
+                    <input type="radio" name="type" value="server" checked class="h-5 w-5 bg-gray-200 dark:bg-gray-700 border-none">
+                    <span class="ml-3 text-lg">Server Application</span>
+                </label>
                 <x-input-error :messages="$errors->get('type')"></x-input-error>
                 <x-forms.primary-button :route="'#'" class="mt-6">Create Client</x-forms.primary-button>
             </form>

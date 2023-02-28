@@ -74,6 +74,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'clients'], function () {
         Route::post('/', [App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');
         Route::delete('/{client}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('clients.destroy')->middleware('password.confirm');
+        Route::get('/showSecret', [App\Http\Controllers\ClientController::class, 'showSecret'])->name('clients.show-secret');
     });
 
     Route::group(['prefix' => 'users'], function () {
