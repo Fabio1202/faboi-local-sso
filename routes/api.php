@@ -17,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::get('/permissions', function() {
+       $user = request()->user();
+       $clientID = request()->get('client_id');
+       $client = \App\Models\Client::find($clientID);
+       $application = $client->application;
+       $permissions = $user->permissions($application);
+    });
+});
+
+Route::group(['middleware' => 'client'], function() {
+    Route::post('permission-groups', [\App\Http\Controllers\Api\PermissionGroupController::class, 'store']);
+});

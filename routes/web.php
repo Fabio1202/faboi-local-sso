@@ -68,6 +68,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get("/registerLink", function () {
             return URL::signedRoute("register");
         })->name("registerLink");
+
+        Route::get('/permissions', function() {
+            $application = Client::find(request()->get('client_id'))->application;
+            return request()->user()->permissions($application);
+        });
     }
 
 

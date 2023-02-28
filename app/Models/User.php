@@ -72,4 +72,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->roles()->where('name', $role)->exists();
     }
+
+    public function getAllPermissions()
+    {
+        $permissions = collect();
+        foreach ($this->roles as $role) {
+            $permissions = $permissions->merge($role->permissions->load('permissionGroup'));
+        }
+        return $permissions;
+    }
+
+    public function permissions($application)
+    {
+        // Where Permissions Group Application ID is equal to the application ID
+        return $this->getAllPermissions()->where('permissionGroup.application_id', $application->id)->pluck('name');
+    }
 }
