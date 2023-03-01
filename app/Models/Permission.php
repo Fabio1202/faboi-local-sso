@@ -11,6 +11,26 @@ class Permission extends Model
 
     protected $guarded = [];
 
+    protected $hidden = [
+        'id',
+        'permission_group_id',
+        'permission_group'
+    ];
+
+    protected $appends = [
+        'permission_group_unique_name'
+    ];
+
+    public function getPermissionGroupUniqueNameAttribute() {
+        //Check if permission group is already loaded
+        $unload = !$this->relationLoaded('permissionGroup');
+        $uniqueName = $this->permissionGroup->unique_name;
+        if ($unload) {
+            $this->unsetRelation('permissionGroup');
+        }
+        return $uniqueName;
+    }
+
     public function permissionGroup() {
         return $this->belongsTo(PermissionGroup::class);
     }

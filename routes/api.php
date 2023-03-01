@@ -28,10 +28,12 @@ Route::group(['middleware' => 'auth:api'], function() {
     });
 });
 
-Route::group(['middleware' => 'client'], function() {
+Route::group(['middleware' => ['client.only', 'json']], function() {
     Route::get('permission-groups', [\App\Http\Controllers\Api\PermissionGroupController::class, 'index']);
     Route::post('permission-groups', [\App\Http\Controllers\Api\PermissionGroupController::class, 'store']);
     Route::put('permission-groups', [\App\Http\Controllers\Api\PermissionGroupController::class, 'update']);
+    Route::put('permission-groups/{permgrp}/permissions', [\App\Http\Controllers\Api\PermissionGroupController::class, 'updatePermissions']);
+    Route::get('permission-groups/{permgrp}/permissions', [\App\Http\Controllers\Api\PermissionGroupController::class, 'permissions']);
     Route::get("test", function() {
         return "test";
     });

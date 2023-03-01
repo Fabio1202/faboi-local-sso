@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\SendJSONResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 
@@ -64,6 +65,12 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'client' => CheckClientCredentials::class
+        'client' => CheckClientCredentials::class,
+        'client.only' => \App\Http\Middleware\AllowOnlyClientsAuthentication::class,
+        'json' => SendJSONResponse::class,
+    ];
+
+    protected $middlewarePriority = [
+        \App\Http\Middleware\SendJSONResponse::class
     ];
 }

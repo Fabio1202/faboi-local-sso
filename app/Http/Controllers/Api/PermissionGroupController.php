@@ -3,16 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ClientRequest;
+use App\Http\Requests\ClientRequest as Request;
 use App\Models\Client;
 use App\Models\PermissionGroup;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Laravel\Passport\Token;
 
 class PermissionGroupController extends Controller
 {
-    public function store(ClientRequest $request) {
+    public function store(Request $request) {
         $application = $request->application();
         $permGroup = PermissionGroup::firstOrCreate([
             'application_id' => $application->id,
@@ -22,20 +20,20 @@ class PermissionGroupController extends Controller
     }
 
     public function index(Request $request) {
-        $application = Client::where('id',$request->input('client_id'))->first()->application;
-        $permGroup = PermissionGroup::where('application_id', $application->id)->first();
-        return $permGroup;
+        $application = $request->application();
+        return $application->permissionGroups;
     }
 
     public function update(Request $request) {
-        $application = Client::where('id',$request->input('client_id'))->first()->application;
-        $permGroups = $request->get('permission_groups');
+        $application = $request->application();
+        $permGroups = request()->input('permission_groups');
         $permGroupUniqueNames = Collection::make($permGroups)->pluck('unique_name')->toArray();
+        $result = [];
         PermissionGroup::whereNotIn('unique_name', $permGroupUniqueNames)->where('application_id', $application->id)->delete();
         foreach ($permGroups as $permGroup) {
             $tmp = PermissionGroup::where('application_id', $application->id)->where('unique_name', $permGroup['unique_name'])->first();
             if(!$tmp) {
-                PermissionGroup::create([
+                $tmp = PermissionGroup::create([
                     'application_id' => $application->id,
                     'name' => $permGroup['name'],
                     'description' => $permGroup['description'],
@@ -46,7 +44,52 @@ class PermissionGroupController extends Controller
                 $tmp->description = $permGroup['description'];
                 $tmp->save();
             }
+            $result[] = $tmp;
         }
-        return $permGroups;
+        return $result;
+    }
+
+    function updatePermissions(Request $request, string $permgrp) {
+        $application = $request->application();
+        $permissionGroup = PermissionGroup::where('application_id', $application->id)->where('unique_name', $permgrp)->first();
+        $permissions = request()->input('permissions');
+        $permissionUniqueNames = Collection::make($permissions)->pluck('unique_name')->toArray();
+        $result = [];
+        $permissionGroup->permissions()->whereNotIn('unique_name', $permissionUniqueNames)->delete();
+        // Check for duplicates
+        $uniqueNames = [];
+        foreach ($permissions as $permission) {
+            if(in_array($permission['unique_name'], $uniqueNames)) {
+                return response()->json([
+                    'id' => 'duplicate_permission_unique_name',
+                    'error' => 'Duplicate permission unique name: ' . $permission['unique_name']
+                ], 400);
+            }
+            $uniqueNames[] = $permission['unique_name'];
+        }
+        foreach ($permissions as $permission) {
+            $tmp = $permissionGroup->permissions()->where('unique_name', $permission['unique_name'])->first();
+            if(!$tmp) {
+                $tmp = $permissionGroup->permissions()->create([
+                    'name' => $permission['name'],
+                    'description' => $permission['description'],
+                    'unique_name' => $permission['unique_name']
+                ]);
+            } else {
+                $tmp->name = $permission['name'];
+                $tmp->description = $permission['description'];
+                $tmp->save();
+            }
+            $result[] = $tmp->setHidden(['id', 'permission_group_id', 'permission_group']);
+        }
+        return Collection::make($result)->map(function($item) {
+            return $item->withoutRelations();
+        });
+    }
+
+    function permissions(Request $request, string $permgrp) {
+        $application = $request->application();
+        $permissionGroup = PermissionGroup::where('application_id', $application->id)->where('unique_name', $permgrp)->first();
+        return $permissionGroup->permissions;
     }
 }
