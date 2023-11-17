@@ -46,6 +46,18 @@ class CreateApplicationPermissions extends Command
 
         $permissionGroups = $application->permissionGroups()->get();
 
+        // Check if multiple permissions in the file have the same unique_name
+        $uniqueNames = [];
+        foreach ($permissions["groups"] as $group => $data) {
+            foreach ($data["permissions"] as $permission => $permissionData) {
+                if (in_array($permission, $uniqueNames)) {
+                    throw new \Exception("Multiple permissions with the same unique_name found in permissions.yml");
+                }
+                $uniqueNames[] = $permission;
+            }
+        }
+
+
 
         // Loop through the permissions
         foreach ($permissions["groups"] as $group => $data) {
