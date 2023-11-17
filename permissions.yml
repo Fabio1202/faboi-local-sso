@@ -6,10 +6,3 @@ groups:
       view:
           name: View
           description: View application
-  test:
-    name: Test
-    description: Test permissions
-    permissions:
-      test123:
-          name: View
-          description: View test

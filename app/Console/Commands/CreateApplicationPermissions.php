@@ -44,8 +44,6 @@ class CreateApplicationPermissions extends Command
             throw new \Exception("permissions.yml must contain permission 'view' in 'application' group");
         }
 
-        $permissionGroups = $application->permissionGroups()->get();
-
         // Check if multiple permissions in the file have the same unique_name
         $uniqueNames = [];
         foreach ($permissions["groups"] as $group => $data) {
@@ -57,7 +55,7 @@ class CreateApplicationPermissions extends Command
             }
         }
 
-
+        $foundNames = [];
 
         // Loop through the permissions
         foreach ($permissions["groups"] as $group => $data) {
@@ -68,8 +66,6 @@ class CreateApplicationPermissions extends Command
                 'name' => $data["name"]
             ]);
 
-            $permissionGroups->forget($foundGroup);
-
             foreach ($data["permissions"] as $permission => $permissionData) {
                 $foundGroup->permissions()->updateOrCreate([
                     'unique_name' => $permission,
@@ -79,22 +75,28 @@ class CreateApplicationPermissions extends Command
                 ]);
 
                 // Remove unique name from array
-                $uniqueNames = array_diff($uniqueNames, [$permission]);
+                $foundNames[] = $permission;
 
                 echo $foundGroup->unique_name . " " . $permission;
             }
         }
 
-        foreach ($permissionGroups as $permissionGroup) {
-            $permissionGroup->delete();
+        $groups = $application->permissionGroups()->get()->filter(function ($group) use ($permissions) {
+            return !array_key_exists($group->unique_name, $permissions["groups"]);
+        });
+
+        // Delete all groups that are not in the file
+        foreach ($groups as $group) {
+            $group->delete();
         }
 
+        $permissions = $application->permissions()->filter(function ($permission) use ($foundNames) {
+            return !in_array($permission->unique_name, $foundNames);
+        });
+
         // Delete all permissions that are not in the file
-        foreach ($uniqueNames as $uniqueName) {
-            $permission = $application->permissions()->where('unique_name', $uniqueName)->first();
-            if ($permission) {
-                $permission->delete();
-            }
+        foreach ($permissions as $permission) {
+            $permission->delete();
         }
     }
 }

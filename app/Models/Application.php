@@ -55,7 +55,14 @@ class Application extends Model
 
     public function permissions()
     {
-        return $this->hasMany(\App\Models\Permission::class);
+        // Add permissions of each permission group to the application
+        $permissions = [];
+        foreach ($this->permissionGroups as $group) {
+            foreach ($group->permissions as $permission) {
+                $permissions[] = $permission;
+            }
+        }
+        return collect($permissions);
     }
 
     public function permissionGroups()
