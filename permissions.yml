@@ -10,6 +10,6 @@ groups:
     name: Test
     description: Test permissions
     permissions:
-      view:
+      test123:
           name: View
           description: View test

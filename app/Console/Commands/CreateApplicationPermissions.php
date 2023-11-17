@@ -77,12 +77,24 @@ class CreateApplicationPermissions extends Command
                     'description' => $permissionData["description"],
                     'name' => $permissionData["name"]
                 ]);
+
+                // Remove unique name from array
+                $uniqueNames = array_diff($uniqueNames, [$permission]);
+
                 echo $foundGroup->unique_name . " " . $permission;
             }
         }
 
         foreach ($permissionGroups as $permissionGroup) {
             $permissionGroup->delete();
+        }
+
+        // Delete all permissions that are not in the file
+        foreach ($uniqueNames as $uniqueName) {
+            $permission = $application->permissions()->where('unique_name', $uniqueName)->first();
+            if ($permission) {
+                $permission->delete();
+            }
         }
     }
 }
