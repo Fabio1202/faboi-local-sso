@@ -6,3 +6,9 @@ groups:
       view:
           name: View
           description: View application
+      manage-clients:
+          name: Manage Clients
+          description: Manage clients, applications, etc.
+      manage-users:
+          name: Manage Users
+          description: Manage users, roles, etc.
