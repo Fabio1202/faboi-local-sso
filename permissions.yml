@@ -1,0 +1,15 @@
+groups:
+  application:
+    name: Application
+    description: Application permissions
+    permissions:
+      view:
+          name: View
+          description: View application
+  test:
+    name: Test
+    description: Test permissions
+    permissions:
+      view:
+          name: View
+          description: View test
