@@ -24,9 +24,9 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600 dark:text-white" />
+                <div class="w-16 flex items-center">
+                    <a href="{{ route('dashboard') }}" class="inline-block w-full">
+                        <x-application-logo class="" />
                     </a>
                 </div>
 
