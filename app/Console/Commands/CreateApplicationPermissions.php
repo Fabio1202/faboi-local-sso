@@ -55,8 +55,6 @@ class CreateApplicationPermissions extends Command
             }
         }
 
-        $foundNames = [];
-
         // Loop through the permissions
         foreach ($permissions["groups"] as $group => $data) {
             $foundGroup = $application->permissionGroups()->updateOrCreate([
@@ -65,6 +63,8 @@ class CreateApplicationPermissions extends Command
                 'description' => $data["description"],
                 'name' => $data["name"]
             ]);
+
+            $foundNames = [];
 
             foreach ($data["permissions"] as $permission => $permissionData) {
                 $foundGroup->permissions()->updateOrCreate([
@@ -79,6 +79,15 @@ class CreateApplicationPermissions extends Command
 
                 echo $foundGroup->unique_name . " " . $permission;
             }
+
+            // Delete all permissions that are not in the file
+            $delPermissions = $foundGroup->permissions()->get()->filter(function ($permission) use ($foundNames) {
+                return !in_array($permission->unique_name, $foundNames);
+            });
+
+            foreach ($delPermissions as $permission) {
+                $permission->delete();
+            }
         }
 
         $groups = $application->permissionGroups()->get()->filter(function ($group) use ($permissions) {
@@ -88,15 +97,6 @@ class CreateApplicationPermissions extends Command
         // Delete all groups that are not in the file
         foreach ($groups as $group) {
             $group->delete();
-        }
-
-        $permissions = $application->permissions()->filter(function ($permission) use ($foundNames) {
-            return !in_array($permission->unique_name, $foundNames);
-        });
-
-        // Delete all permissions that are not in the file
-        foreach ($permissions as $permission) {
-            $permission->delete();
         }
     }
 }

@@ -85,6 +85,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function permissions($application)
     {
         // Where Permissions Group Application ID is equal to the application ID
-        return $this->getAllPermissions()->where('permissionGroup.application_id', $application->id)->pluck('name');
+        return $this->getAllPermissions()->where('permissionGroup.application_id', $application->id)->pluck('unique_name');
+    }
+
+    public function hasPermission($permission)
+    {
+        $application = Application::where('name', 'auth')->first();
+        return $this->permissions($application)->contains('unique_name', $permission);
     }
 }

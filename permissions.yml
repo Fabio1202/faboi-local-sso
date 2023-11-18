@@ -1,14 +1,47 @@
 groups:
   application:
-    name: Application
-    description: Application permissions
+    name: Permissions App
+    description: View Permissions App
     permissions:
       view:
           name: View
           description: View application
-      manage-clients:
-          name: Manage Clients
-          description: Manage clients, applications, etc.
-      manage-users:
-          name: Manage Users
-          description: Manage users, roles, etc.
+  users:
+      name: Users
+      description: User permissions
+      permissions:
+          view-users:
+              name: View Users
+              description: View all users
+          add-user:
+              name: Add User
+              description: Add a new user
+          manage-users:
+              name: Manage Users
+              description: Edit and delete users
+  roles:
+      name: Roles
+      description: Role permissions
+      permissions:
+          view-roles:
+              name: View Roles
+              description: View all roles
+          add-role:
+              name: Add Role
+              description: Add a new role
+          manage-roles:
+              name: Manage Roles
+              description: Edit and delete roles
+  applications:
+      name: Applications
+      description: Manage applications available in the app
+      permissions:
+          view-applications:
+              name: View Applications
+              description: View all applications
+          add-application:
+              name: Add Application
+              description: Add a new application
+          manage-applications:
+              name: Manage Applications
+              description: Edit and delete applications
