@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Role;
+use App\Models\User;
 
 class RoleController extends Controller
 {
@@ -17,7 +18,8 @@ class RoleController extends Controller
     {
         return view('roles.create', [
             'applications' => Application::all(),
-            'role' => new Role()
+            'role' => new Role(),
+            'users' => User::paginate(10)
         ]);
     }
 
@@ -32,6 +34,8 @@ class RoleController extends Controller
 
         $role->permissions()->attach(request()->get('permissions'));
 
+        $role->users()->attach(request()->get('users'));
+
         return redirect()->route('roles.index')->with('success', 'Role created successfully');
     }
 
@@ -39,7 +43,8 @@ class RoleController extends Controller
     {
         return view('roles.show', [
             'role' => $role,
-            'applications' => Application::all()
+            'applications' => Application::all(),
+            'users' => User::paginate(10)
         ]);
     }
 
@@ -53,6 +58,8 @@ class RoleController extends Controller
         $role->update($data);
 
         $role->permissions()->sync(request()->get('permissions'));
+
+        $role->users()->sync(request()->get('users'));
 
         return redirect()->route('roles.index')->with('success', 'Role updated successfully');
     }

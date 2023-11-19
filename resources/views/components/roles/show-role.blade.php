@@ -35,4 +35,26 @@
             </x-drop-down.group-extend>
         @endforeach
     </x-card-view>
+
+    <x-forms.list :pagination="$users->links()" class="mt-6">
+        <x-slot:title>Users</x-slot:title>
+
+        <x-slot:listEntries>
+            @foreach($users as $user)
+                <label>
+                    <x-forms.list-entry :last-entry="$loop->last">
+                        <x-slot:h1>
+                            {{ $user->name }}
+                        </x-slot:h1>
+                        <x-slot:h2>
+                            {{ $user->email }}
+                        </x-slot:h2>
+                        <x-slot:actions>
+                            <input type="checkbox" class="h-8 w-8 bg-gray-200 dark:bg-gray-700 border-none rounded-md" name="users[]" value="{{ $user->id }}" {{ $role->users->contains($user) ? "checked" : "" }}/>
+                        </x-slot:actions>
+                    </x-forms.list-entry>
+                </label>
+            @endforeach
+        </x-slot:listEntries>
+    </x-forms.list>
 </div>

@@ -7,7 +7,7 @@
     <form method="POST" action="{{ route('roles.update', ['role' => $role]) }}">
         @csrf
         <div class="py-12">
-            <x-roles.show-role :role="$role" :applications="$applications"/>
+            <x-roles.show-role :role="$role" :applications="$applications" :users="$users"/>
 
             <x-card-view class="mt-6">
                 <x-primary-button>

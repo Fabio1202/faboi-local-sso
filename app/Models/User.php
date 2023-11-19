@@ -76,8 +76,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAllPermissions()
     {
         $permissions = collect();
-        foreach ($this->roles as $role) {
-            $permissions = $permissions->merge($role->permissions->load('permissionGroup'));
+        foreach ($this->roles()->get() as $role) {
+            $permissions = $permissions->merge($role->permissions()->with('permissionGroup')->get());
         }
         return $permissions;
     }
@@ -91,6 +91,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasPermission($permission)
     {
         $application = Application::where('name', 'auth')->first();
-        return $this->permissions($application)->contains('unique_name', $permission);
+        return $this->permissions($application)->contains($permission);
     }
 }

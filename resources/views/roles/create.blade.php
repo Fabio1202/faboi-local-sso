@@ -7,7 +7,7 @@
 <form method="POST" action="{{ route('roles.store') }}">
     @csrf
     <div class="py-12">
-        <x-roles.show-role :role="$role" :applications="$applications"/>
+        <x-roles.show-role :role="$role" :applications="$applications" :users="$users"/>
 
         <x-card-view class="mt-6">
             <x-primary-button>

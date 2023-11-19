@@ -11,14 +11,16 @@ class ShowRole extends Component
 
     public $role;
     public $applications;
+    public $users;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($role, $applications)
+    public function __construct($role, $applications, $users)
     {
         $this->role = $role;
         $this->applications = $applications;
+        $this->users = $users;
     }
 
     /**
