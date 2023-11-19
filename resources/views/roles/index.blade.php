@@ -8,7 +8,7 @@
     <div class="py-12">
         <x-forms.list title="Available Roles" :pagination="$roles->links()">
             @slot("button")
-                <a class="px-14 py-2 bg-primary text-white rounded-full" href="{{ route("users.create") }}">
+                <a class="px-14 py-2 bg-primary text-white rounded-full" href="{{ route("roles.create") }}">
                     <button class="">Add Role</button>
                 </a>
             @endslot
