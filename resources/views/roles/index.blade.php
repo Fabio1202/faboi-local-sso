@@ -24,7 +24,9 @@
                         @endslot
 
                         @slot('actions')
-
+                                <a href="{{ route('roles.show', $role) }}">
+                                    <span><i class="fa-solid fa-edit text-xl"></i></span>
+                                </a>
                         @endslot
                     </x-forms.list-entry>
                 @endforeach
