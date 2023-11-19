@@ -14,6 +14,11 @@
             'name' => 'Users',
             'route' => route('users.index'),
             'active' => request()->routeIs('users.index'),
+        ],
+        [
+            'name' => 'Roles',
+            'route' => route('roles.index'),
+            'active' => request()->routeIs('roles.index'),
         ]
     ];
 @endphp

@@ -86,6 +86,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users.index')->can('view-users');
         Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create')->can('add-user');
     });
+
+    Route::group(['prefix' => 'roles'], function () {
+        Route::get('/', [App\Http\Controllers\RoleController::class, 'index'])->name('roles.index')->can('view-roles');
+    });
 });
 
 require __DIR__.'/auth.php';
