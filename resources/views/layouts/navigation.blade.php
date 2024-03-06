@@ -9,16 +9,19 @@
             'name' => 'Applications',
             'route' => route('applications.index'),
             'active' => request()->routeIs('applications.index'),
+            'can' => 'view-applications',
         ],
         [
             'name' => 'Users',
             'route' => route('users.index'),
             'active' => request()->routeIs('users.index'),
+            'can' => 'view-users',
         ],
         [
             'name' => 'Roles',
             'route' => route('roles.index'),
             'active' => request()->routeIs('roles.index'),
+            'can' => 'view-roles',
         ]
     ];
 @endphp
@@ -38,9 +41,11 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @foreach($navLinks as $navLink)
-                        <x-nav-link :href="$navLink['route']" :active="$navLink['active']">
-                            {{ $navLink['name'] }}
-                        </x-nav-link>
+                        @if(!isset($navLink['can']) || auth()->user()->can($navLink['can']))
+                            <x-nav-link :href="$navLink['route']" :active="$navLink['active']">
+                                {{ $navLink['name'] }}
+                            </x-nav-link>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -91,9 +96,11 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @foreach($navLinks as $navLink)
-                <x-responsive-nav-link :href="$navLink['route']" :active="$navLink['active']">
-                    {{ $navLink['name'] }}
-                </x-responsive-nav-link>
+                @if(!isset($navLink['can']) || auth()->user()->can($navLink['can']))
+                    <x-responsive-nav-link :href="$navLink['route']" :active="$navLink['active']">
+                        {{ $navLink['name'] }}
+                    </x-responsive-nav-link>
+                @endif
             @endforeach
         </div>
 
