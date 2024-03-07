@@ -11,18 +11,20 @@ class InputWithIcon extends Component
     public $type;
     public $placeholder;
     public $value;
+    public $disabled;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $name, $type = 'text', $placeholder = '', $value = '')
+    public function __construct($label, $name, $type = 'text', $placeholder = '', $value = '', $disabled = false)
     {
         $this->label = $label;
         $this->name = $name;
         $this->type = $type;
         $this->placeholder = $placeholder;
         $this->value = $value;
+        $this->disabled = $disabled;
     }
 
     /**

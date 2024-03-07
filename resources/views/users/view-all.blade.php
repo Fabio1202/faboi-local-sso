@@ -36,10 +36,10 @@
 
                         @slot("actions")
                             <a class="text-lg ml-3" href="#">
-                                <i class="fa-solid fa-pen-to-square text-2xl"></i>
+                                <i class="fa-solid fa-pen-to-square text-xl"></i>
                             </a>
-                            <a class="text-lg ml-3 text-red-800" href="#">
-                                <i class="fa-solid fa-trash text-2xl"></i>
+                            <a class="text-lg ml-2 text-red-800" href="#">
+                                <i class="fa-solid fa-trash text-xl"></i>
                             </a>
                         @endslot
                     </x-forms.list-entry>

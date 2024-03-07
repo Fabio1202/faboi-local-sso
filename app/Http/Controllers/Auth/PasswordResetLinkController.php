@@ -31,6 +31,13 @@ class PasswordResetLinkController extends Controller
             'email' => ['required', 'email'],
         ]);
 
+        // Check if current password is null
+        $user = \App\Models\User::where('email', $request->email)->first();
+        if ($user->password === null) {
+            return back()->withInput($request->only('email'))
+                ->withErrors(['email' => __('This account is not activated yet. Please check your email for an activation link.')]);
+        }
+
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
         // need to show to the user. Finally, we'll send out a proper response.
