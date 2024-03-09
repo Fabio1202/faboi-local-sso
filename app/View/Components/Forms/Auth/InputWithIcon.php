@@ -12,12 +12,13 @@ class InputWithIcon extends Component
     public $placeholder;
     public $value;
     public $disabled;
+    public $autocomplete;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $name, $type = 'text', $placeholder = '', $value = '', $disabled = false)
+    public function __construct($label, $name, $type = 'text', $placeholder = '', $value = '', $disabled = false, $autocomplete = '')
     {
         $this->label = $label;
         $this->name = $name;
@@ -25,6 +26,7 @@ class InputWithIcon extends Component
         $this->placeholder = $placeholder;
         $this->value = $value;
         $this->disabled = $disabled;
+        $this->autocomplete = $autocomplete;
     }
 
     /**

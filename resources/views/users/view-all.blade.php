@@ -35,7 +35,7 @@
                         @endslot
 
                         @slot("actions")
-                            <a class="text-lg ml-3" href="#">
+                            <a class="text-lg ml-3" href="{{ route("users.show", $user) }}">
                                 <i class="fa-solid fa-pen-to-square text-xl"></i>
                             </a>
                             <a class="text-lg ml-2 text-red-800" href="#">

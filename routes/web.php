@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
+
+Route::get('/users/activate', [App\Http\Controllers\UserController::class, 'activate'])->name('users.activate')->middleware('signed');
+Route::post('/users/activate', [App\Http\Controllers\UserController::class, 'postActivate'])->name('users.activate.post');
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -43,12 +47,12 @@ Route::get('/', function () {
     });
 }*/
 
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('/register', function () {
-        return view('auth.register');
-    })->name('register')->middleware('signed');
-    Route::post('/register', [\Laravel\Fortify\Http\Controllers\RegisteredUserController::class, 'store'])->name('register.post');
-});
+//Route::group(['middleware' => 'guest'], function () {
+//    Route::get('/register', function () {
+//        return view('auth.register');
+//    })->name('register')->middleware('signed');
+//    Route::post('/register', [\Laravel\Fortify\Http\Controllers\RegisteredUserController::class, 'store'])->name('register.post');
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -85,6 +89,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users.index')->can('view-users');
         Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create')->can('add-user');
+        Route::get('/{user:id}', [App\Http\Controllers\UserController::class, 'show'])->name('users.show')->can('manage-users');
+        Route::post('/', [App\Http\Controllers\UserController::class, 'store'])->name('users.store')->can('manage-users');
+        Route::post('/{user:id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update')->can('manage-users');
     });
 
     Route::group(['prefix' => 'roles'], function () {
