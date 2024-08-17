@@ -56,11 +56,11 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'applications'], function () {
-        Route::get('/', [App\Http\Controllers\ApplicationController::class, 'index'])->name('applications.index');
-        Route::get('/create', [App\Http\Controllers\ApplicationController::class, 'create'])->name('applications.create');
-        Route::post('/', [App\Http\Controllers\ApplicationController::class, 'store'])->name('applications.store');
-        Route::get('/{application:id}', [App\Http\Controllers\ApplicationController::class, 'show'])->name('applications.show');
-        Route::get('/{application}/clients/create', [App\Http\Controllers\ClientController::class, 'create'])->name('clients.create');
+        Route::get('/', [App\Http\Controllers\ApplicationController::class, 'index'])->name('applications.index')->can('view-applications');
+        Route::get('/create', [App\Http\Controllers\ApplicationController::class, 'create'])->name('applications.create')->can('add-application');
+        Route::post('/', [App\Http\Controllers\ApplicationController::class, 'store'])->name('applications.store')->can('add-application');
+        Route::get('/{application:id}', [App\Http\Controllers\ApplicationController::class, 'show'])->name('applications.show')->can('manage-applications');
+        Route::get('/{application}/clients/create', [App\Http\Controllers\ClientController::class, 'create'])->name('clients.create')->can('manage-applications');
     });
 
     // ONLY FOR TESTING IN LOCAL ENVIRONMENT
@@ -83,8 +83,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::group(['prefix' => 'users'], function () {
-        Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
-        Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+        Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users.index')->can('view-users');
+        Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create')->can('add-user');
+    });
+
+    Route::group(['prefix' => 'roles'], function () {
+        Route::get('/', [App\Http\Controllers\RoleController::class, 'index'])->name('roles.index')->can('view-roles');
+        Route::get('/create', [App\Http\Controllers\RoleController::class, 'create'])->name('roles.create')->can('add-role');
+        Route::post('/', [App\Http\Controllers\RoleController::class, 'store'])->name('roles.store')->can('add-role');
+        Route::get('/{role:id}', [App\Http\Controllers\RoleController::class, 'show'])->name('roles.show')->can('manage-roles');
+        Route::post('/{role:id}', [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update')->can('manage-roles');
     });
 });
 

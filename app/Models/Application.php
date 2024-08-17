@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    use HasFactory;
+    //use HasFactory;
 
     protected $guarded = [];
 
@@ -27,10 +27,12 @@ class Application extends Model
                 $permGroup = $model->permissionGroups()->create([
                     'name' => 'Default',
                     'description' => 'Default permission group',
+                    'unique_name' => 'application'
                 ]);
                 $perm = $permGroup->permissions()->create([
                     'name' => 'View',
                     'description' => 'View the application',
+                    'unique_name' => 'view'
                 ]);
                 Role::where('name', 'admin')->first()->permissions()->attach($perm);
             }
@@ -55,7 +57,14 @@ class Application extends Model
 
     public function permissions()
     {
-        return $this->hasMany(\App\Models\Permission::class);
+        // Add permissions of each permission group to the application
+        $permissions = [];
+        foreach ($this->permissionGroups as $group) {
+            foreach ($group->permissions as $permission) {
+                $permissions[] = $permission;
+            }
+        }
+        return collect($permissions);
     }
 
     public function permissionGroups()

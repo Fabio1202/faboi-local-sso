@@ -9,11 +9,19 @@
             'name' => 'Applications',
             'route' => route('applications.index'),
             'active' => request()->routeIs('applications.index'),
+            'can' => 'view-applications',
         ],
         [
             'name' => 'Users',
             'route' => route('users.index'),
             'active' => request()->routeIs('users.index'),
+            'can' => 'view-users',
+        ],
+        [
+            'name' => 'Roles',
+            'route' => route('roles.index'),
+            'active' => request()->routeIs('roles.index'),
+            'can' => 'view-roles',
         ]
     ];
 @endphp
@@ -24,18 +32,20 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600 dark:text-white" />
+                <div class="w-16 flex items-center">
+                    <a href="{{ route('dashboard') }}" class="inline-block w-full">
+                        <x-application-logo class="" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @foreach($navLinks as $navLink)
-                        <x-nav-link :href="$navLink['route']" :active="$navLink['active']">
-                            {{ $navLink['name'] }}
-                        </x-nav-link>
+                        @if(!isset($navLink['can']) || auth()->user()->can($navLink['can']))
+                            <x-nav-link :href="$navLink['route']" :active="$navLink['active']">
+                                {{ $navLink['name'] }}
+                            </x-nav-link>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -86,9 +96,11 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @foreach($navLinks as $navLink)
-                <x-responsive-nav-link :href="$navLink['route']" :active="$navLink['active']">
-                    {{ $navLink['name'] }}
-                </x-responsive-nav-link>
+                @if(!isset($navLink['can']) || auth()->user()->can($navLink['can']))
+                    <x-responsive-nav-link :href="$navLink['route']" :active="$navLink['active']">
+                        {{ $navLink['name'] }}
+                    </x-responsive-nav-link>
+                @endif
             @endforeach
         </div>
 

@@ -8,13 +8,14 @@ use Laravel\Scout\Searchable;
 
 class Role extends Model
 {
-    use HasFactory, Searchable;
+    use Searchable;
+    //use HasFactory;
 
     protected $guarded = [];
 
     public function users()
     {
-        return $this->belongsToMany(\App\Models\User::class);
+        return $this->belongsToMany(\App\Models\User::class)->withTimestamps();
     }
 
     public function permissions()

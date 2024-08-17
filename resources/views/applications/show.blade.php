@@ -121,26 +121,26 @@
                                 </x-slot:description>
                             </x-drop-down.group-item>
                         @endforeach
-                        <div class="flex">
-                            <div class="border-r-[2px] dark:border-gray-900 border-gray-100 w-1/3 rounded-md px-5 py-3 flex justify-start bg-white dark:bg-gray-800 items-center content-center cursor-pointer">
-                                <i class="fa-solid fa-plus rounded-full border-dashed border-2 border-gray-300 dark:border-gray-600 p-3"></i>
-                                <h1 class="ml-3 text-lg font-bold">New Permission</h1>
-                            </div>
-                            <div class="border-l-[2px] dark:border-gray-900 border-r-[2px] border-gray-100 w-1/3 rounded-md px-5 py-3 flex justify-start bg-white dark:bg-gray-800 items-center content-center cursor-pointer">
-                                <i class="fa-solid fa-pencil rounded-full border-dashed border-2 border-gray-300 dark:border-gray-600 p-3"></i>
-                                <h1 class="ml-3 text-lg font-bold">Edit Group</h1>
-                            </div>
-                            <div class="border-l-[2px] dark:border-gray-900 border-gray-100 w-1/3 rounded-md px-5 py-3 flex justify-start bg-white dark:bg-gray-800 items-center content-center cursor-pointer">
-                                <i class="fa-solid fa-trash rounded-full border-dashed border-2 border-gray-300 dark:border-gray-600 p-3"></i>
-                                <h1 class="ml-3 text-lg font-bold">Delete Group</h1>
-                            </div>
-                        </div>
+{{--                        <div class="flex">--}}
+{{--                            <div class="border-r-[2px] dark:border-gray-900 border-gray-100 w-1/3 rounded-md px-5 py-3 flex justify-start bg-white dark:bg-gray-800 items-center content-center cursor-pointer">--}}
+{{--                                <i class="fa-solid fa-plus rounded-full border-dashed border-2 border-gray-300 dark:border-gray-600 p-3"></i>--}}
+{{--                                <h1 class="ml-3 text-lg font-bold">New Permission</h1>--}}
+{{--                            </div>--}}
+{{--                            <div class="border-l-[2px] dark:border-gray-900 border-r-[2px] border-gray-100 w-1/3 rounded-md px-5 py-3 flex justify-start bg-white dark:bg-gray-800 items-center content-center cursor-pointer">--}}
+{{--                                <i class="fa-solid fa-pencil rounded-full border-dashed border-2 border-gray-300 dark:border-gray-600 p-3"></i>--}}
+{{--                                <h1 class="ml-3 text-lg font-bold">Edit Group</h1>--}}
+{{--                            </div>--}}
+{{--                            <div class="border-l-[2px] dark:border-gray-900 border-gray-100 w-1/3 rounded-md px-5 py-3 flex justify-start bg-white dark:bg-gray-800 items-center content-center cursor-pointer">--}}
+{{--                                <i class="fa-solid fa-trash rounded-full border-dashed border-2 border-gray-300 dark:border-gray-600 p-3"></i>--}}
+{{--                                <h1 class="ml-3 text-lg font-bold">Delete Group</h1>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </x-drop-down.group-extend>
                 @endforeach
-                <div class="rounded-md p-5 mt-3 flex justify-start bg-gray-100 dark:bg-gray-900 items-center content-center cursor-pointer">
-                    <i class="fa-solid fa-plus rounded-full border-dashed border-2 border-gray-300 dark:border-gray-600 p-3"></i>
-                    <h1 class="ml-3 text-lg font-bold">New Permission group</h1>
-                </div>
+{{--                <div class="rounded-md p-5 mt-3 flex justify-start bg-gray-100 dark:bg-gray-900 items-center content-center cursor-pointer">--}}
+{{--                    <i class="fa-solid fa-plus rounded-full border-dashed border-2 border-gray-300 dark:border-gray-600 p-3"></i>--}}
+{{--                    <h1 class="ml-3 text-lg font-bold">New Permission group</h1>--}}
+{{--                </div>--}}
             </x-card-view>
         @endif
     </div>
