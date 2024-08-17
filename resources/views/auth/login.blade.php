@@ -14,6 +14,15 @@
             <span class="mt-4 inline-block text-black dark:text-white w-full">Forgot your password?</span>
         </a>
     </form>
+    <div class="w-full flex justify-around items-center flex-nowrap">
+        <span class="block w-full border-solid border-b-2 border-black"></span>
+        <h2 class="px-3">or</h2>
+        <span class="block w-full border-solid border-b-2 border-black"></span>
+    </div>
+    <button class="mt-6 block w-full py-3 border-solid border-2 border-gray-300 rounded-md text-xl">
+        <i class="fa-solid fa-fingerprint mr-3"></i>
+        Sign in with passkey
+    </button>
     <x-slot name="image">
         <img alt="" src="{{ asset('img/Fingerprint-Authentication.svg') }}" class="w-2/3 object-cover">
     </x-slot>
