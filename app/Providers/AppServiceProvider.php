@@ -26,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Passport::hashClientSecrets();
+
+        // Register PasskeyService
+        $this->app->singleton(\App\Services\Auth\PasskeyService::class, function () {
+            return new \App\Services\Auth\PasskeyService();
+        });
     }
 }

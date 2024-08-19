@@ -20,8 +20,8 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-/*if(config('app.env') == 'local') {
-    Route::get('/test-auth-screen', function () {
+//if(config('app.env') == 'local') {
+    /*Route::get('/test-auth-screen', function () {
         return view('vendor.passport.authorize', [
             'client' =>  new Client([
                 'name' => 'Test Client',
@@ -40,8 +40,8 @@ Route::get('/', function () {
             ]),
             'authToken' => 'test-token',
         ]);
-    });
-}*/
+    });*/
+//}
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', function () {
@@ -94,6 +94,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{role:id}', [App\Http\Controllers\RoleController::class, 'show'])->name('roles.show')->can('manage-roles');
         Route::post('/{role:id}', [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update')->can('manage-roles');
     });
-});
 
+    Route::group(['prefix' => 'passkeys'], function () {
+        Route::get('/generate-registration-options', [\App\Http\Controllers\PasskeyController::class, 'generateRegistrationOptions'])->name('passkey.generate-registration-options');
+        Route::post('/verify-registration',[\App\Http\Controllers\PasskeyController::class, 'validateRegistration'])->name('passkey.verify-registration');
+        Route::get('/generate-authentication-options', [\App\Http\Controllers\PasskeyController::class, 'generateAuthenticationOptions'])->name('passkey.generate-authentication-options')->withoutMiddleware(['verified', 'auth']);
+        Route::post('/verify-authentication',[\App\Http\Controllers\PasskeyController::class, 'validateAuthentication'])->name('passkey.verify-authentication')->withoutMiddleware(['verified', 'auth']);
+    });
+});
 require __DIR__.'/auth.php';

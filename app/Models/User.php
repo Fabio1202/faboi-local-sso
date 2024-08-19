@@ -93,4 +93,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $application = Application::where('name', 'auth')->first();
         return $this->permissions($application)->contains($permission);
     }
+
+    public function passkeys()
+    {
+        return $this->hasMany(Passkey::class);
+    }
 }
