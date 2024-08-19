@@ -40,11 +40,11 @@ window.registerPasskey = (csrf) => {
     });
 }
 
-window.authenticatePasskey = (csrf) => {
+window.authenticatePasskey = (csrf, bool = false) => {
     fetch("/passkeys/generate-authentication-options")
     .then(res => res.json())
     .then(data => {
-        startAuthentication(data)
+        startAuthentication(data, bool)
         .then(res => {
             fetch("/passkeys/verify-authentication", {
                 method: "POST",
@@ -67,3 +67,4 @@ window.authenticatePasskey = (csrf) => {
         });
     });
 }
+

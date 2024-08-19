@@ -7,7 +7,7 @@
 
     <form class="w-full p-6" method="POST" action="{{ route('login') }}">
         @csrf
-        <x-forms.auth.input-with-icon label="E-Mail" name="email" placeholder="big.fudge@gnb.com" type="email" autofocus :value="old('email')">
+        <x-forms.auth.input-with-icon autocomplete="webauthn" label="E-Mail" name="email" placeholder="big.fudge@gnb.com" type="email" autofocus="true" :value="old('email')">
             <i class="fa-solid fa-user text-xl px-2 text-gray-300"></i>
         </x-forms.auth.input-with-icon>
         <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -20,15 +20,17 @@
             <span class="mt-4 inline-block text-black dark:text-white w-full">Forgot your password?</span>
         </a>
     </form>
-    <div class="w-full flex justify-around items-center flex-nowrap">
+    <div class="px-3 w-full flex justify-around items-center flex-nowrap">
         <span class="block w-full border-solid border-b-2 border-black"></span>
         <h2 class="px-3">or</h2>
         <span class="block w-full border-solid border-b-2 border-black"></span>
     </div>
-    <button id="passkey-authenticate" class="mt-6 block w-full py-3 border-solid border-2 border-gray-300 rounded-md text-xl">
-        <i class="fa-solid fa-fingerprint mr-3"></i>
-        Sign in with passkey
-    </button>
+    <div class="w-full px-6">
+        <button id="passkey-authenticate" class="mt-6 block w-full py-3 border-solid border-2 border-gray-300 rounded-md text-xl">
+            <i class="fa-solid fa-fingerprint mr-3"></i>
+            Sign in with passkey
+        </button>
+    </div>
     <x-slot name="image">
         <img alt="" src="{{ asset('img/Fingerprint-Authentication.svg') }}" class="w-2/3 object-cover">
     </x-slot>
