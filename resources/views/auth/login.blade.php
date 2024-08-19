@@ -1,4 +1,10 @@
 <x-auth-layout :title="__('Welcome') . '!'">
+    <script type="module">
+        document.getElementById("passkey-authenticate").addEventListener("click", () => {
+            window.authenticatePasskey("{{ csrf_token() }}");
+        });
+    </script>
+
     <form class="w-full p-6" method="POST" action="{{ route('login') }}">
         @csrf
         <x-forms.auth.input-with-icon label="E-Mail" name="email" placeholder="big.fudge@gnb.com" type="email" autofocus :value="old('email')">
@@ -19,7 +25,7 @@
         <h2 class="px-3">or</h2>
         <span class="block w-full border-solid border-b-2 border-black"></span>
     </div>
-    <button class="mt-6 block w-full py-3 border-solid border-2 border-gray-300 rounded-md text-xl">
+    <button id="passkey-authenticate" class="mt-6 block w-full py-3 border-solid border-2 border-gray-300 rounded-md text-xl">
         <i class="fa-solid fa-fingerprint mr-3"></i>
         Sign in with passkey
     </button>

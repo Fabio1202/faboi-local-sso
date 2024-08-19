@@ -39,3 +39,31 @@ window.registerPasskey = (csrf) => {
         });
     });
 }
+
+window.authenticatePasskey = (csrf) => {
+    fetch("/passkeys/generate-authentication-options")
+    .then(res => res.json())
+    .then(data => {
+        startAuthentication(data)
+        .then(res => {
+            fetch("/passkeys/verify-authentication", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrf,
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(res)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    window.location.href = "/";
+                }
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    });
+}

@@ -98,7 +98,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'passkeys'], function () {
         Route::get('/generate-registration-options', [\App\Http\Controllers\PasskeyController::class, 'generateRegistrationOptions'])->name('passkey.generate-registration-options');
         Route::post('/verify-registration',[\App\Http\Controllers\PasskeyController::class, 'validateRegistration'])->name('passkey.verify-registration');
+        Route::get('/generate-authentication-options', [\App\Http\Controllers\PasskeyController::class, 'generateAuthenticationOptions'])->name('passkey.generate-authentication-options')->withoutMiddleware(['verified', 'auth']);
+        Route::post('/verify-authentication',[\App\Http\Controllers\PasskeyController::class, 'validateAuthentication'])->name('passkey.verify-authentication')->withoutMiddleware(['verified', 'auth']);
     });
 });
-
 require __DIR__.'/auth.php';
