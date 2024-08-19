@@ -95,9 +95,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/{role:id}', [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update')->can('manage-roles');
     });
 
-    Route::group(['prefix' => 'passkey'], function () {
-        Route::get('/generate-authentication-options', [\App\Http\Controllers\PasskeyController::class, 'generateAuthenticationOptions'])->name('passkey.generate-authentication-options');
-        Route::post('/',[\App\Http\Controllers\PasskeyController::class, 'store'])->name('passkey.store');
+    Route::group(['prefix' => 'passkeys'], function () {
+        Route::get('/generate-registration-options', [\App\Http\Controllers\PasskeyController::class, 'generateRegistrationOptions'])->name('passkey.generate-registration-options');
+        Route::post('/verify-registration',[\App\Http\Controllers\PasskeyController::class, 'validateRegistration'])->name('passkey.verify-registration');
     });
 });
 
