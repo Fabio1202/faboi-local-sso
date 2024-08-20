@@ -39,7 +39,7 @@ class Application extends Model
         });
     }
 
-    public function getShortDescriptionAttribute(): string
+    public function getShortDescriptionAttribute(): string|null
     {
         // if description is longer than 100 characters, cut it and add '...' at the end
         return strlen($this->description) > 100 ? substr($this->description, 0, 100).'...' : $this->description;

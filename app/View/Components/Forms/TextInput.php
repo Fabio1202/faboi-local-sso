@@ -14,7 +14,7 @@ class TextInput extends Component
 
     public string $type;
 
-    public string $value;
+    public string|null $value;
 
     /**
      * Create a new component instance.
@@ -23,7 +23,7 @@ class TextInput extends Component
      * @param  string  $title
      * @param  string|null  $placeholder
      * @param  string  $type
-     * @param  string  $value
+     * @param  null|string  $value
      * @return void
      */
     public function __construct($name, $title, $placeholder = null, $type = 'text', $value = '')
