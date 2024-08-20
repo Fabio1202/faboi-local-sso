@@ -14,7 +14,7 @@ class InputWithIcon extends Component
 
     public string $placeholder;
 
-    public string $value;
+    public string|null $value;
 
     public string $autocomplete;
 
@@ -25,7 +25,7 @@ class InputWithIcon extends Component
      *
      * @return void
      */
-    public function __construct(string $label, string $name, string $type = 'text', string $placeholder = '', string $value = '', string $autocomplete = '', bool $autofocus = false)
+    public function __construct(string $label, string $name, string $type = 'text', string $placeholder = '', string|null $value = '', string $autocomplete = '', bool $autofocus = false)
     {
         $this->label = $label;
         $this->name = $name;
