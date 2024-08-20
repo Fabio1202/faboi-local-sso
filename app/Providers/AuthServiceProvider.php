@@ -23,8 +23,9 @@ class AuthServiceProvider extends ServiceProvider
      * Register any authentication / authorization services.
      *
      * @return void
+     * @noinspection PhpInconsistentReturnPointsInspection
      */
-    public function boot()
+    public function boot(): void
     {
         Passport::useClientModel(Client::class);
 
