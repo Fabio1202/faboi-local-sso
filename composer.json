@@ -21,6 +21,7 @@
     },
     "require-dev": {
         "deployer/deployer": "^7.1",
+        "enlightn/enlightn": "^2.10",
         "fakerphp/faker": "^1.9.1",
         "larastan/larastan": "^2.0",
         "laravel/breeze": "^2.0",
