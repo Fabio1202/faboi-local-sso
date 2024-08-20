@@ -211,7 +211,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'YAML' => 'Symfony\Component\Yaml\Yaml'
+        'YAML' => 'Symfony\Component\Yaml\Yaml',
     ])->toArray(),
 
 ];

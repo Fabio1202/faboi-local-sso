@@ -24,11 +24,11 @@ return new class extends Migration
         });
 
         // Create default user
-        $user = new \App\Models\User();
+        $user = new \App\Models\User;
         $user->name = 'Fabio Boi';
         $user->email = 'fabio.boi@icloud.com';
         $user->password = \Illuminate\Support\Facades\Hash::make('password');
-        if (env('APP_ENV') === 'local') {
+        if (config('app.env') === 'local') {
             $user->email_verified_at = now();
         }
         $user->save();

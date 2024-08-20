@@ -27,7 +27,7 @@ return new class extends Migration
         });
 
         // Save Auth Application
-        $application = new \App\Models\Application();
+        $application = new \App\Models\Application;
         $application->name = 'Auth';
         $application->first_party = true;
         $application->description = 'This is the default auth application. It is used to manage users, roles and permissions.';

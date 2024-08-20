@@ -18,23 +18,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'auth:api'], function() {
-    Route::get('/permissions', function() {
-       $user = request()->user();
-       $clientID = request()->get('client_id');
-       $client = \App\Models\Client::find($clientID);
-       $application = $client->application;
-       $permissions = $user->permissions($application);
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/permissions', function () {
+        $user = request()->user();
+        $clientID = request()->get('client_id');
+        $client = \App\Models\Client::find($clientID);
+        $application = $client->application;
+        $permissions = $user->permissions($application);
     });
 });
 
-Route::group(['middleware' => ['client.only', 'json']], function() {
+Route::group(['middleware' => ['client.only', 'json']], function () {
     Route::get('permission-groups', [\App\Http\Controllers\Api\PermissionGroupController::class, 'index']);
     Route::post('permission-groups', [\App\Http\Controllers\Api\PermissionGroupController::class, 'store']);
     Route::put('permission-groups', [\App\Http\Controllers\Api\PermissionGroupController::class, 'update']);
     Route::put('permission-groups/{permgrp}/permissions', [\App\Http\Controllers\Api\PermissionGroupController::class, 'updatePermissions']);
     Route::get('permission-groups/{permgrp}/permissions', [\App\Http\Controllers\Api\PermissionGroupController::class, 'permissions']);
-    Route::get("test", function() {
-        return "test";
+    Route::get('test', function () {
+        return 'test';
     });
 });

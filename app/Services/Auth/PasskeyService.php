@@ -3,7 +3,7 @@
 namespace App\Services\Auth;
 
 use App\Models\Passkey;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Serializer;
 use Webauthn\AttestationStatement\AttestationStatementSupportManager;
 use Webauthn\AttestationStatement\NoneAttestationStatementSupport;
 use Webauthn\AuthenticatorAssertionResponse;
@@ -22,25 +22,26 @@ use Webauthn\PublicKeyCredentialUserEntity;
 
 class PasskeyService
 {
+    private Serializer $serializer;
 
-    private $serializer;
-    private $authenticatorAttestationResponseValidator;
-    private $authenticatorAssertionResponseValidator;
+    private AuthenticatorAttestationResponseValidator $authenticatorAttestationResponseValidator;
+
+    private AuthenticatorAssertionResponseValidator $authenticatorAssertionResponseValidator;
 
     public function __construct()
     {
         $attestationStatementSupportManager = AttestationStatementSupportManager::create();
-        $attestationStatementSupportManager->add(new NoneAttestationStatementSupport());
+        $attestationStatementSupportManager->add(new NoneAttestationStatementSupport);
 
         $factory = new WebauthnSerializerFactory($attestationStatementSupportManager);
+        // @var Serializer
         $this->serializer = $factory->create();
 
-        $csmFactory = new CeremonyStepManagerFactory();
+        $csmFactory = new CeremonyStepManagerFactory;
         $csmFactory->setSecuredRelyingPartyId(['localhost']);
 
         $creationCSM = $csmFactory->creationCeremony();
         $requestCSM = $csmFactory->requestCeremony();
-
 
         $this->authenticatorAttestationResponseValidator = AuthenticatorAttestationResponseValidator::create(
             $creationCSM
@@ -53,7 +54,8 @@ class PasskeyService
         );
     }
 
-    public function generateCredentialCreateOptions() {
+    public function generateCredentialCreateOptions(): string
+    {
         $rpEntity = PublicKeyCredentialRpEntity::create(
             config('app.name'),
             str_replace(['http://', 'https://'], '', config('app.url')),
@@ -85,14 +87,10 @@ class PasskeyService
 
         session()->put('passkey.create.options', $response);
 
-        $response = $this->serializer->normalize($response);
-
-
-
-        return $response;
+        return $this->serializer->normalize($response);
     }
 
-    public function verifyRegistration()
+    public function verifyRegistration(): false|string
     {
 
         // Map request()->all() to remove all \ from JSON
@@ -121,18 +119,20 @@ class PasskeyService
 
             // Store the key in the database
 
-            $key = new Passkey();
+            $key = new Passkey;
             $key->keySource = json_encode($this->serializer->normalize($publicKeyCredentialSource));
-            $key->aaguid = request()->get("id");
+            $key->aaguid = request()->get('id');
             auth()->user()->passkeys()->save($key);
 
             //return $this->serializer->normalize($publicKeyCredentialSource);
-            return json_encode(["success" => true]);
+            return json_encode(['success' => true]);
         }
-        return json_encode(["success" => false]);
+
+        return json_encode(['success' => false]);
     }
 
-    public function generateCredentialAuthorizationOptions() {
+    public function generateCredentialAuthorizationOptions(): string
+    {
         $rpEntity = str_replace(['http://', 'https://'], '', config('app.url'));
 
         $challenge = random_bytes(30);
@@ -145,12 +145,10 @@ class PasskeyService
 
         session()->put('passkey.request.options', $response);
 
-        $response = $this->serializer->normalize($response);
-
-        return $response;
+        return $this->serializer->normalize($response);
     }
 
-    public function verifyAuthorization()
+    public function verifyAuthorization(): array
     {
         $json = request()->all();
 
@@ -165,7 +163,7 @@ class PasskeyService
         if ($publicKeyCredential->response instanceof AuthenticatorAssertionResponse) {
             $authenticatorAssertionResponse = $publicKeyCredential->response;
 
-            $passkey = Passkey::where('aaguid', request()->get("id"))->firstOrFail();
+            $passkey = Passkey::where('aaguid', request()->get('id'))->firstOrFail();
 
             $originalKey = $this->serializer->denormalize(json_decode($passkey->keySource, associative: true), PublicKeyCredentialSource::class, 'json');
 
@@ -182,8 +180,9 @@ class PasskeyService
 
             auth()->login($passkey->user);
 
-            return ["success" => true];
+            return ['success' => true];
         }
-        return ["success" => false];
+
+        return ['success' => false];
     }
 }

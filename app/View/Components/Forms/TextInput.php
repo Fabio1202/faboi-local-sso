@@ -6,22 +6,27 @@ use Illuminate\View\Component;
 
 class TextInput extends Component
 {
-    public $name;
+    public string $name;
 
-    public $title;
+    public string $title;
 
-    public $placeholder;
+    public string $placeholder;
 
-    public $type;
+    public string $type;
 
-    public $value;
+    public string $value;
 
     /**
      * Create a new component instance.
      *
+     * @param  string  $name
+     * @param  string  $title
+     * @param  string|null  $placeholder
+     * @param  string  $type
+     * @param  string  $value
      * @return void
      */
-    public function __construct($name, $title, $placeholder = null, $type = 'text', $value = "")
+    public function __construct($name, $title, $placeholder = null, $type = 'text', $value = '')
     {
         $this->name = $name;
         $this->title = $title;

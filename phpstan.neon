@@ -1,0 +1,34 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+
+    # Level 9 is the highest level
+    level: 6
+
+    # Ignore errors
+    ignoreErrors:
+        -
+            message: '#Method ([A-Za-z]+(\\[A-Za-z]+)+)::[A-Za-z]+\(\) should return bool\|Illuminate\\Auth\\Access\\Response but return statement is missing.#'
+            path: app/Policies/*
+        -
+            message: '#Method ([A-Za-z]+(\\[A-Za-z]+)+)::[A-Za-z]+\(\) has no return type specified.#'
+            path: app/Http/Controllers/*
+        - '#^Unable to resolve the template type (TMakeKey|TMakeValue) in call to method static method Illuminate\\Support\\Collection\<\(int\|string\),mixed\>\:\:make\(\)$#'
+        - '#^Method ([A-Za-z]+(\\[A-Za-z]+)+)::[A-Za-z]+\(\) return type with generic class Illuminate(\\[A-Za-z\\]+) does not specify its types\: [A-Za-z,\s]+$#'
+        - '#^Class [\\A-Za-z]+ uses generic trait Illuminate(\\[A-Za-z\\]+) but does not specify its types\: [A-Za-z,\s]+$#'
+        - '#^Property (([A-Za-z]+(\\[A-Za-z]+)+)::\$[A-Za-z]+) with generic class Illuminate(\\[A-Za-z\\]+) does not specify its types\: [A-Za-z,\s]+$#'
+        - '#^Method ([\\A-Za-z]+)::__[A-Za-z]+\(\) has parameter \$[A-Za-z]+ with generic class Illuminate([\\A-Za-z]+) but does not specify its types\: [A-Za-z,\s]+$#'
+#    ignoreErrors:
+#        - '#PHPDoc tag @var#'
+#
+#    excludePaths:
+#        - ./*/*/FileToBeExcluded.php
+#
+    checkMissingIterableValueType: false
+
+    stubFiles:
+        - stubs/WebauthnSerializerFactory.stub

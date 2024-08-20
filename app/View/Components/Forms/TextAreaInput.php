@@ -6,22 +6,22 @@ use Illuminate\View\Component;
 
 class TextAreaInput extends Component
 {
-    public $name;
+    public string $name;
 
-    public $title;
+    public string $title;
 
-    public $placeholder;
+    public string $placeholder;
 
-    public $preventNewLines = false;
+    public bool $preventNewLines = false;
 
-    public $value;
+    public string $value;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $title, $placeholder = null, $preventNewLines = false, $value = '')
+    public function __construct(string $name, string $title, ?string $placeholder = null, bool $preventNewLines = false, string $value = '')
     {
         $this->name = $name;
         $this->title = $title;

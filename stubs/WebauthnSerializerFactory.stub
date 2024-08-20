@@ -1,0 +1,15 @@
+<?php
+
+namespace Webauthn\Denormalizer;
+
+use Symfony\Component\Serializer\Serializer;
+
+final readonly class WebauthnSerializerFactory
+{
+    /**
+     * @phpstan-return Serializer
+     */
+    public function create() : Serializer {
+        return new Serializer();
+    }
+}

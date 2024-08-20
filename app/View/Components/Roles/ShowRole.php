@@ -2,21 +2,35 @@
 
 namespace App\View\Components\Roles;
 
+use App\Models\Application;
+use App\Models\Role;
+use App\Models\User;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class ShowRole extends Component
 {
+    public Role $role;
 
-    public $role;
-    public $applications;
-    public $users;
+    /**
+     * @var Application[]|Collection
+     */
+    public array|Collection $applications;
+
+    /**
+     * @var Collection|User[]
+     */
+    public array|Collection $users;
 
     /**
      * Create a new component instance.
+     *
+     * @param  Application[]|Collection  $applications
+     * @param  Collection|User[]  $users
      */
-    public function __construct($role, $applications, $users)
+    public function __construct(Role $role, array|Collection $applications, array|Collection $users)
     {
         $this->role = $role;
         $this->applications = $applications;
