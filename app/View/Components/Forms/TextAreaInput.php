@@ -19,14 +19,9 @@ class TextAreaInput extends Component
     /**
      * Create a new component instance.
      *
-     * @param string $name
-     * @param string $title
-     * @param string|null $placeholder
-     * @param bool $preventNewLines
-     * @param string $value
-     *@return void
+     * @return void
      */
-    public function __construct(string $name, string $title, string $placeholder = null, bool $preventNewLines = false, string $value = '')
+    public function __construct(string $name, string $title, ?string $placeholder = null, bool $preventNewLines = false, string $value = '')
     {
         $this->name = $name;
         $this->title = $title;

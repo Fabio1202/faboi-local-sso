@@ -7,23 +7,23 @@ use Illuminate\View\Component;
 class InputWithIcon extends Component
 {
     public string $label;
+
     public string $name;
+
     public string $type;
+
     public string $placeholder;
+
     public string $value;
+
     public string $autocomplete;
+
     public bool $autofocus;
+
     /**
      * Create a new component instance.
      *
-     * @param string $label
-     * @param string $name
-     * @param string $type
-     * @param string $placeholder
-     * @param string $value
-     * @param string $autocomplete
-     * @param bool $autofocus
-     *@return void
+     * @return void
      */
     public function __construct(string $label, string $name, string $type = 'text', string $placeholder = '', string $value = '', string $autocomplete = '', bool $autofocus = false)
     {

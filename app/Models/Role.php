@@ -14,12 +14,12 @@ class Role extends Model
 
     protected $guarded = [];
 
-    public function users() : BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\User::class)->withTimestamps();
     }
 
-    public function permissions() : BelongsToMany
+    public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Permission::class)->withTimestamps();
     }

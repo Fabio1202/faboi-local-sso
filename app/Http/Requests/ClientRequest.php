@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use App\Models\Application;
 use App\Models\Client;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request as BaseRequest;
 use Laravel\Passport\Token;
 use Lcobucci\JWT\Configuration;
 
 class ClientRequest extends BaseRequest
 {
-    public function client() : Client|null {
+    public function client(): ?Client
+    {
         $bearerToken = request()->bearerToken();
         /** @noinspection PhpUndefinedMethodInspection */
         // @phpstan-ignore-next-line
@@ -21,8 +21,8 @@ class ClientRequest extends BaseRequest
         return Token::find($tokenId)->client;
     }
 
-    public function application() : Application {
+    public function application(): Application
+    {
         return $this->client()->application;
     }
-
 }

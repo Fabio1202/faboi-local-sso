@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Register PasskeyService
         $this->app->singleton(\App\Services\Auth\PasskeyService::class, function () {
-            return new \App\Services\Auth\PasskeyService();
+            return new \App\Services\Auth\PasskeyService;
         });
     }
 }

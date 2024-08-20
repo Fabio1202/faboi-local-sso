@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('oauth_clients', function (Blueprint $table) {
-            $table->dropColumn("user_id");
-            $table->foreignUuid("application_id")->constrained("applications")->cascadeOnDelete();
+            $table->dropColumn('user_id');
+            $table->foreignUuid('application_id')->constrained('applications')->cascadeOnDelete();
         });
     }
 

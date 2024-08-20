@@ -19,15 +19,14 @@ class TextInput extends Component
     /**
      * Create a new component instance.
      *
+     * @param  string  $name
+     * @param  string  $title
+     * @param  string|null  $placeholder
+     * @param  string  $type
+     * @param  string  $value
      * @return void
-     * @param string $name
-     * @param string $title
-     * @param string|null $placeholder
-     * @param string $type
-     * @param string $value
-     *
      */
-    public function __construct($name, $title, $placeholder = null, $type = 'text', $value = "")
+    public function __construct($name, $title, $placeholder = null, $type = 'text', $value = '')
     {
         $this->name = $name;
         $this->title = $title;

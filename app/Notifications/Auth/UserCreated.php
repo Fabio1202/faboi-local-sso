@@ -26,9 +26,6 @@ class UserCreated extends Notification
 
     /**
      * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
      */
     public function via(mixed $notifiable): array
     {
@@ -45,8 +42,8 @@ class UserCreated extends Notification
     {
         return (new MailMessage)
             ->greeting('Hello!')
-                    ->line('Für dich wurde ein Account im Faboi System erstellt. Bitte klicke auf den Button um deinen Account einzurichten!')
-                    ->action('Click to activate', URL::signedRoute('register', ['uuid' => $this->user->uuid]));
+            ->line('Für dich wurde ein Account im Faboi System erstellt. Bitte klicke auf den Button um deinen Account einzurichten!')
+            ->action('Click to activate', URL::signedRoute('register', ['uuid' => $this->user->uuid]));
     }
 
     /**

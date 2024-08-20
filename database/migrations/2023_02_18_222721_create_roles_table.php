@@ -28,7 +28,7 @@ return new class extends Migration
         });
 
         // Create default role
-        $role = new \App\Models\Role();
+        $role = new \App\Models\Role;
         $role->name = 'Admin';
         $role->description = 'Default Admin Role';
         $role->save();

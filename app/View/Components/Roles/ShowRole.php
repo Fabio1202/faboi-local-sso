@@ -12,7 +12,6 @@ use Illuminate\View\Component;
 
 class ShowRole extends Component
 {
-
     public Role $role;
 
     /**
@@ -27,9 +26,9 @@ class ShowRole extends Component
 
     /**
      * Create a new component instance.
-     * @param Role $role
-     * @param Application[]|Collection $applications
-     * @param Collection|User[] $users
+     *
+     * @param  Application[]|Collection  $applications
+     * @param  Collection|User[]  $users
      */
     public function __construct(Role $role, array|Collection $applications, array|Collection $users)
     {

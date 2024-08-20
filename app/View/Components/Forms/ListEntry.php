@@ -12,7 +12,6 @@ class ListEntry extends Component
      * Create a new component instance.
      *
      * @return void
-     * @param bool $lastEntry
      */
     public function __construct(bool $lastEntry)
     {

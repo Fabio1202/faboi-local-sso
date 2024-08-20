@@ -6,16 +6,13 @@ use Illuminate\View\Component;
 
 class AuthLayout extends Component
 {
-
     public string $title;
 
-    /**
-     * @param string $title
-     */
     public function __construct(string $title)
     {
         $this->title = $title;
     }
+
     /**
      * Get the view / contents that represent the component.
      *

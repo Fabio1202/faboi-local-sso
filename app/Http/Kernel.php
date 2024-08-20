@@ -71,6 +71,6 @@ class Kernel extends HttpKernel
     ];
 
     protected $middlewarePriority = [
-        \App\Http\Middleware\SendJSONResponse::class
+        \App\Http\Middleware\SendJSONResponse::class,
     ];
 }

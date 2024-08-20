@@ -58,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the roles for the user.
      */
-    public function roles() : \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Role::class)->withTimestamps();
     }
@@ -73,16 +73,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->roles()->where('name', $role)->exists();
     }
 
-    public function getAllPermissions() : \Illuminate\Support\Collection
+    public function getAllPermissions(): \Illuminate\Support\Collection
     {
         $permissions = collect();
         foreach ($this->roles()->get() as $role) {
             $permissions = $permissions->merge($role->permissions()->with('permissionGroup')->get());
         }
+
         return $permissions;
     }
 
-    public function permissions(Application $application) : \Illuminate\Support\Collection
+    public function permissions(Application $application): \Illuminate\Support\Collection
     {
         // Where Permissions Group Application ID is equal to the application ID
         return $this->getAllPermissions()->where('permissionGroup.application_id', $application->id)->pluck('unique_name');
@@ -91,6 +92,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasPermission(Permission $permission): bool
     {
         $application = Application::where('name', 'auth')->first();
+
         return $this->permissions($application)->contains($permission);
     }
 

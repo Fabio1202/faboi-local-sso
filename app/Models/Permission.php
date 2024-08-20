@@ -14,20 +14,22 @@ class Permission extends Model
     protected $hidden = [
         'id',
         'permission_group_id',
-        'permission_group'
+        'permission_group',
     ];
 
     protected $appends = [
-        'permission_group_unique_name'
+        'permission_group_unique_name',
     ];
 
-    public function getPermissionGroupUniqueNameAttribute(): string {
+    public function getPermissionGroupUniqueNameAttribute(): string
+    {
         //Check if permission group is already loaded
-        $unload = !$this->relationLoaded('permissionGroup');
+        $unload = ! $this->relationLoaded('permissionGroup');
         $uniqueName = $this->permissionGroup->unique_name;
         if ($unload) {
             $this->unsetRelation('permissionGroup');
         }
+
         return $uniqueName;
     }
 

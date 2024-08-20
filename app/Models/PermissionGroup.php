@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+
 class PermissionGroup extends Model
 {
     //use HasFactory;
@@ -12,7 +13,7 @@ class PermissionGroup extends Model
     protected $guarded = [];
 
     protected $hidden = [
-        'id'
+        'id',
     ];
 
     protected static function boot()

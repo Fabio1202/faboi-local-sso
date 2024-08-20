@@ -13,7 +13,6 @@ class PrimaryButton extends Component
      * Create a new component instance.
      *
      * @return void
-     * @param Route $route
      */
     public function __construct(Route $route)
     {
