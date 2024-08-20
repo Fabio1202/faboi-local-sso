@@ -7,9 +7,12 @@ use Illuminate\View\Component;
 class AuthLayout extends Component
 {
 
-    public $title;
+    public string $title;
 
-    public function __construct($title)
+    /**
+     * @param string $title
+     */
+    public function __construct(string $title)
     {
         $this->title = $title;
     }

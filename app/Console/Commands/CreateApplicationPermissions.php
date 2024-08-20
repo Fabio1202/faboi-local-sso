@@ -27,7 +27,7 @@ class CreateApplicationPermissions extends Command
      * Execute the console command.
      * @throws \Exception
      */
-    public function handle()
+    public function handle(): void
     {
         // Parse a YAML file into a PHP array
         $permissions = Yaml::parseFile(base_path('permissions.yml'));

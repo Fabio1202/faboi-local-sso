@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    use HasFactory;
+    //use HasFactory;
 
     protected $guarded = [];
 
@@ -21,7 +21,7 @@ class Permission extends Model
         'permission_group_unique_name'
     ];
 
-    public function getPermissionGroupUniqueNameAttribute() {
+    public function getPermissionGroupUniqueNameAttribute(): string {
         //Check if permission group is already loaded
         $unload = !$this->relationLoaded('permissionGroup');
         $uniqueName = $this->permissionGroup->unique_name;
@@ -31,7 +31,8 @@ class Permission extends Model
         return $uniqueName;
     }
 
-    public function permissionGroup() {
+    public function permissionGroup(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(PermissionGroup::class);
     }
 }

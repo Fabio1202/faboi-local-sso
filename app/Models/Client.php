@@ -14,7 +14,8 @@ class Client extends BaseClient
         return $this->firstParty() || $this->application->first_party;
     }
 
-    public function application() {
+    public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(Application::class);
     }
 }

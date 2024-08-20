@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class ListEntry extends Component
 {
-    public $lastEntry;
+    public bool $lastEntry;
 
     /**
      * Create a new component instance.
      *
      * @return void
+     * @param bool $lastEntry
      */
-    public function __construct($lastEntry)
+    public function __construct(bool $lastEntry)
     {
         $this->lastEntry = $lastEntry;
     }
@@ -23,7 +24,7 @@ class ListEntry extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|string|\Closure|\Illuminate\View\View
     {
         return view('components.forms.list-entry');
     }

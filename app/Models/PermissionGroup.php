@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-
 class PermissionGroup extends Model
 {
-    use HasFactory;
+    //use HasFactory;
 
     protected $guarded = [];
 
@@ -27,12 +26,12 @@ class PermissionGroup extends Model
         });
     }
 
-    public function application()
+    public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Models\Application::class);
     }
 
-    public function permissions()
+    public function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Models\Permission::class);
     }

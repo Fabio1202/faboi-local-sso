@@ -4,6 +4,8 @@ namespace App\Services\Auth;
 
 use App\Models\Passkey;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 use Webauthn\AttestationStatement\AttestationStatementSupportManager;
 use Webauthn\AttestationStatement\NoneAttestationStatementSupport;
 use Webauthn\AuthenticatorAssertionResponse;
@@ -23,9 +25,9 @@ use Webauthn\PublicKeyCredentialUserEntity;
 class PasskeyService
 {
 
-    private $serializer;
-    private $authenticatorAttestationResponseValidator;
-    private $authenticatorAssertionResponseValidator;
+    private Serializer $serializer;
+    private AuthenticatorAttestationResponseValidator $authenticatorAttestationResponseValidator;
+    private AuthenticatorAssertionResponseValidator $authenticatorAssertionResponseValidator;
 
     public function __construct()
     {
@@ -33,6 +35,7 @@ class PasskeyService
         $attestationStatementSupportManager->add(new NoneAttestationStatementSupport());
 
         $factory = new WebauthnSerializerFactory($attestationStatementSupportManager);
+        // @var Serializer
         $this->serializer = $factory->create();
 
         $csmFactory = new CeremonyStepManagerFactory();
@@ -53,7 +56,7 @@ class PasskeyService
         );
     }
 
-    public function generateCredentialCreateOptions() {
+    public function generateCredentialCreateOptions() : string {
         $rpEntity = PublicKeyCredentialRpEntity::create(
             config('app.name'),
             str_replace(['http://', 'https://'], '', config('app.url')),
@@ -85,14 +88,10 @@ class PasskeyService
 
         session()->put('passkey.create.options', $response);
 
-        $response = $this->serializer->normalize($response);
-
-
-
-        return $response;
+        return $this->serializer->normalize($response);
     }
 
-    public function verifyRegistration()
+    public function verifyRegistration(): false|string
     {
 
         // Map request()->all() to remove all \ from JSON
@@ -132,7 +131,7 @@ class PasskeyService
         return json_encode(["success" => false]);
     }
 
-    public function generateCredentialAuthorizationOptions() {
+    public function generateCredentialAuthorizationOptions() : string {
         $rpEntity = str_replace(['http://', 'https://'], '', config('app.url'));
 
         $challenge = random_bytes(30);
@@ -145,12 +144,10 @@ class PasskeyService
 
         session()->put('passkey.request.options', $response);
 
-        $response = $this->serializer->normalize($response);
-
-        return $response;
+        return $this->serializer->normalize($response);
     }
 
-    public function verifyAuthorization()
+    public function verifyAuthorization(): array
     {
         $json = request()->all();
 

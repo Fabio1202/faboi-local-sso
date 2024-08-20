@@ -5,26 +5,32 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest as Request;
 use App\Models\Client;
+use App\Models\Permission;
 use App\Models\PermissionGroup;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 
 class PermissionGroupController extends Controller
 {
-    public function store(Request $request) {
+    public function store(Request $request) : PermissionGroup {
         $application = $request->application();
-        $permGroup = PermissionGroup::firstOrCreate([
+        return PermissionGroup::firstOrCreate([
             'application_id' => $application->id,
             'name' => $request->get('name')
         ]);
-        return $permGroup;
     }
 
-    public function index(Request $request) {
+    public function index(Request $request) : Collection {
         $application = $request->application();
         return $application->permissionGroups;
     }
 
-    public function update(Request $request) {
+    /**
+     * @param Request $request
+     * @return array<PermissionGroup>
+     */
+    public function update(Request $request) : array
+    {
         $application = $request->application();
         $permGroups = request()->input('permission_groups');
         $permGroupUniqueNames = Collection::make($permGroups)->pluck('unique_name')->toArray();
@@ -49,7 +55,7 @@ class PermissionGroupController extends Controller
         return $result;
     }
 
-    function updatePermissions(Request $request, string $permgrp) {
+    function updatePermissions(Request $request, string $permgrp) : Collection|JsonResponse {
         $application = $request->application();
         $permissionGroup = PermissionGroup::where('application_id', $application->id)->where('unique_name', $permgrp)->first();
         $permissions = request()->input('permissions');
@@ -87,7 +93,7 @@ class PermissionGroupController extends Controller
         });
     }
 
-    function permissions(Request $request, string $permgrp) {
+    function permissions(Request $request, string $permgrp) : Collection {
         $application = $request->application();
         $permissionGroup = PermissionGroup::where('application_id', $application->id)->where('unique_name', $permgrp)->first();
         return $permissionGroup->permissions;
