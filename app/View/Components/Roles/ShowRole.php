@@ -6,6 +6,7 @@ use App\Models\Application;
 use App\Models\Role;
 use App\Models\User;
 use Closure;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
@@ -22,7 +23,7 @@ class ShowRole extends Component
     /**
      * @var Collection|User[]
      */
-    public array|Collection $users;
+    public Paginator $users;
 
     /**
      * Create a new component instance.
@@ -30,7 +31,7 @@ class ShowRole extends Component
      * @param  Application[]|Collection  $applications
      * @param  Collection|User[]  $users
      */
-    public function __construct(Role $role, array|Collection $applications, array|Collection $users)
+    public function __construct(Role $role, array|Collection $applications, Paginator $users)
     {
         $this->role = $role;
         $this->applications = $applications;
