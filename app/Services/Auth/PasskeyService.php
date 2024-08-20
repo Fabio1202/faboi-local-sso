@@ -3,6 +3,7 @@
 namespace App\Services\Auth;
 
 use App\Models\Passkey;
+use ArrayObject;
 use Symfony\Component\Serializer\Serializer;
 use Webauthn\AttestationStatement\AttestationStatementSupportManager;
 use Webauthn\AttestationStatement\NoneAttestationStatementSupport;
@@ -54,7 +55,7 @@ class PasskeyService
         );
     }
 
-    public function generateCredentialCreateOptions(): string
+    public function generateCredentialCreateOptions(): array|ArrayObject|bool|float|int|null|string
     {
         $rpEntity = PublicKeyCredentialRpEntity::create(
             config('app.name'),
@@ -131,7 +132,7 @@ class PasskeyService
         return json_encode(['success' => false]);
     }
 
-    public function generateCredentialAuthorizationOptions(): string
+    public function generateCredentialAuthorizationOptions(): array|ArrayObject|bool|float|int|null|string
     {
         $rpEntity = str_replace(['http://', 'https://'], '', config('app.url'));
 

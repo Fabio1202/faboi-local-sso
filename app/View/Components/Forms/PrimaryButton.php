@@ -7,14 +7,14 @@ use Illuminate\View\Component;
 
 class PrimaryButton extends Component
 {
-    public Route $route;
+    public string $route;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Route $route)
+    public function __construct(string $route)
     {
         $this->route = $route;
     }
