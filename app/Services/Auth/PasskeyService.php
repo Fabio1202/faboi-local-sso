@@ -3,6 +3,7 @@
 namespace App\Services\Auth;
 
 use App\Models\Passkey;
+use App\Providers\RouteServiceProvider;
 use ArrayObject;
 use Symfony\Component\Serializer\Serializer;
 use Webauthn\AttestationStatement\AttestationStatementSupportManager;
@@ -181,7 +182,10 @@ class PasskeyService
 
             auth()->login($passkey->user);
 
-            return ['success' => true];
+            return [
+                'success' => true,
+                'redirect' => session()->get("url.intended", RouteServiceProvider::HOME)
+            ];
         }
 
         return ['success' => false];

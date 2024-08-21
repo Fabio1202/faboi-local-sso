@@ -58,7 +58,7 @@ window.authenticatePasskey = (csrf, bool = false) => {
             .then(res => res.json())
             .then(data => {
                 if(data.success) {
-                    window.location.href = "/";
+                    window.location.href = data.redirect;
                 }
             })
         })
