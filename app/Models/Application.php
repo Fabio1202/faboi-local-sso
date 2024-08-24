@@ -23,39 +23,39 @@ class Application extends Model
         });
 
         static::created(function ($model) {
-            if($model->uses_role_system) {
+            if ($model->uses_role_system) {
                 $permGroup = $model->permissionGroups()->create([
                     'name' => 'Default',
                     'description' => 'Default permission group',
-                    'unique_name' => 'application'
+                    'unique_name' => 'application',
                 ]);
                 $perm = $permGroup->permissions()->create([
                     'name' => 'View',
                     'description' => 'View the application',
-                    'unique_name' => 'view'
+                    'unique_name' => 'view',
                 ]);
                 Role::where('name', 'admin')->first()->permissions()->attach($perm);
             }
         });
     }
 
-    public function getShortDescriptionAttribute()
+    public function getShortDescriptionAttribute(): string|null
     {
         // if description is longer than 100 characters, cut it and add '...' at the end
         return strlen($this->description) > 100 ? substr($this->description, 0, 100).'...' : $this->description;
     }
 
-    public function owner()
+    public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class);
     }
 
-    public function clients()
+    public function clients(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Models\Client::class);
     }
 
-    public function permissions()
+    public function permissions(): \Illuminate\Support\Collection
     {
         // Add permissions of each permission group to the application
         $permissions = [];
@@ -67,7 +67,7 @@ class Application extends Model
         return collect($permissions);
     }
 
-    public function permissionGroups()
+    public function permissionGroups(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Models\PermissionGroup::class);
     }

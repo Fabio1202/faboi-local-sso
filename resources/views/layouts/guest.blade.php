@@ -12,6 +12,10 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <script type="module">
+            window.authenticatePasskey("{{ csrf_token() }}", true);
+        </script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

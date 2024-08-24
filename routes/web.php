@@ -24,28 +24,28 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-/*if(config('app.env') == 'local') {
-    Route::get('/test-auth-screen', function () {
-        return view('vendor.passport.authorize', [
-            'client' =>  new Client([
-                'name' => 'Test Client',
-                'redirect' => 'http://localhost:8000/callback',
-                'id' => 1,
-                'application' => \App\Models\Application::first(),
-            ]),
-            'scopes' => [],
-            'user' => User::find(1),
-            'request' => new \Illuminate\Http\Request([
-                'client_id' => 1,
-                'redirect_uri' => 'http://localhost:8000/callback',
-                'response_type' => 'code',
-                'scope' => '',
-                'state' => ''
-            ]),
-            'authToken' => 'test-token',
-        ]);
-    });
-}*/
+//if(config('app.env') == 'local') {
+/*Route::get('/test-auth-screen', function () {
+    return view('vendor.passport.authorize', [
+        'client' =>  new Client([
+            'name' => 'Test Client',
+            'redirect' => 'http://localhost:8000/callback',
+            'id' => 1,
+            'application' => \App\Models\Application::first(),
+        ]),
+        'scopes' => [],
+        'user' => User::find(1),
+        'request' => new \Illuminate\Http\Request([
+            'client_id' => 1,
+            'redirect_uri' => 'http://localhost:8000/callback',
+            'response_type' => 'code',
+            'scope' => '',
+            'state' => ''
+        ]),
+        'authToken' => 'test-token',
+    ]);
+});*/
+//}
 
 //Route::group(['middleware' => 'guest'], function () {
 //    Route::get('/register', function () {
@@ -68,17 +68,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // ONLY FOR TESTING IN LOCAL ENVIRONMENT
-    if(config("app.env") == "local") {
-        Route::get("/registerLink", function () {
-            return URL::signedRoute("register");
-        })->name("registerLink");
+    if (config('app.env') == 'local') {
+        Route::get('/registerLink', function () {
+            return URL::signedRoute('register');
+        })->name('registerLink');
 
-        Route::get('/permissions', function() {
+        Route::get('/permissions', function () {
             $application = Client::find(request()->get('client_id'))->application;
+
             return request()->user()->permissions($application);
         });
     }
-
 
     Route::group(['prefix' => 'clients'], function () {
         Route::post('/', [App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');
@@ -103,4 +103,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
+    Route::group(['prefix' => 'passkeys'], function () {
+        Route::get('/generate-registration-options', [\App\Http\Controllers\PasskeyController::class, 'generateRegistrationOptions'])->name('passkey.generate-registration-options');
+        Route::post('/verify-registration', [\App\Http\Controllers\PasskeyController::class, 'validateRegistration'])->name('passkey.verify-registration');
+        Route::get('/generate-authentication-options', [\App\Http\Controllers\PasskeyController::class, 'generateAuthenticationOptions'])->name('passkey.generate-authentication-options')->withoutMiddleware(['verified', 'auth']);
+        Route::post('/verify-authentication', [\App\Http\Controllers\PasskeyController::class, 'validateAuthentication'])->name('passkey.verify-authentication')->withoutMiddleware(['verified', 'auth']);
+    });
+});
 require __DIR__.'/auth.php';

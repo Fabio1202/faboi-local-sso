@@ -2,18 +2,19 @@
 
 namespace App\View\Components\Forms;
 
+use Illuminate\Routing\Route;
 use Illuminate\View\Component;
 
 class PrimaryButton extends Component
 {
-    public $route;
+    public string $route;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($route)
+    public function __construct(string $route)
     {
         $this->route = $route;
     }

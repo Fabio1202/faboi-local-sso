@@ -8,12 +8,12 @@ use Illuminate\Support\Str;
 
 class PermissionGroup extends Model
 {
-    use HasFactory;
+    //use HasFactory;
 
     protected $guarded = [];
 
     protected $hidden = [
-        'id'
+        'id',
     ];
 
     protected static function boot()
@@ -27,12 +27,12 @@ class PermissionGroup extends Model
         });
     }
 
-    public function application()
+    public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Models\Application::class);
     }
 
-    public function permissions()
+    public function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Models\Permission::class);
     }

@@ -11,6 +11,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::paginate(20);
+
         return view('roles.index', compact('roles'));
     }
 
@@ -18,8 +19,8 @@ class RoleController extends Controller
     {
         return view('roles.create', [
             'applications' => Application::all(),
-            'role' => new Role(),
-            'users' => User::paginate(10)
+            'role' => new Role,
+            'users' => User::paginate(10),
         ]);
     }
 
@@ -27,7 +28,7 @@ class RoleController extends Controller
     {
         $data = request()->validate([
             'name' => 'required|string|unique:roles',
-            'description' => 'string'
+            'description' => 'string',
         ]);
 
         $role = Role::create($data);
@@ -44,7 +45,7 @@ class RoleController extends Controller
         return view('roles.show', [
             'role' => $role,
             'applications' => Application::all(),
-            'users' => User::paginate(10)
+            'users' => User::paginate(10),
         ]);
     }
 
@@ -52,7 +53,7 @@ class RoleController extends Controller
     {
         $data = request()->validate([
             'name' => 'required|string',
-            'description' => 'string'
+            'description' => 'string',
         ]);
 
         $role->update($data);

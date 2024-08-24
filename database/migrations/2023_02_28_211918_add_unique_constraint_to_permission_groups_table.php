@@ -32,8 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('permission_groups', function (Blueprint $table) {
-
-        });
+        Schema::table('permission_groups', function (Blueprint $table) {});
     }
 };

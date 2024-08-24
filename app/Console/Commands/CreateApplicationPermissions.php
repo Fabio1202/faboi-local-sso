@@ -25,9 +25,10 @@ class CreateApplicationPermissions extends Command
 
     /**
      * Execute the console command.
+     *
      * @throws \Exception
      */
-    public function handle()
+    public function handle(): void
     {
         // Parse a YAML file into a PHP array
         $permissions = Yaml::parseFile(base_path('permissions.yml'));
@@ -36,11 +37,11 @@ class CreateApplicationPermissions extends Command
         $application = Application::where('name', 'auth')->first();
 
         // if groups do not contain application, throw error
-        if (!array_key_exists("application", $permissions["groups"])) {
+        if (! array_key_exists('application', $permissions['groups'])) {
             throw new \Exception("No group 'application' found in permissions.yml");
         }
 
-        if(!array_key_exists("view", $permissions["groups"]["application"]["permissions"])) {
+        if (! array_key_exists('view', $permissions['groups']['application']['permissions'])) {
             throw new \Exception("permissions.yml must contain permission 'view' in 'application' group");
         }
 
@@ -82,7 +83,7 @@ class CreateApplicationPermissions extends Command
 
             // Delete all permissions that are not in the file
             $delPermissions = $foundGroup->permissions()->get()->filter(function ($permission) use ($foundNames) {
-                return !in_array($permission->unique_name, $foundNames);
+                return ! in_array($permission->unique_name, $foundNames);
             });
 
             foreach ($delPermissions as $permission) {
