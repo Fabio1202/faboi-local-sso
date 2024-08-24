@@ -7,11 +7,11 @@
     @else
         <form class="w-full p-6" method="POST" action="{{ route('users.activate.post') }}">
             @csrf
-            <x-forms.auth.input-with-icon :disabled="true" placeholder="Harvey Specter" label="Name" name="name" :value="old('name') ?? $user->name">
+            <x-forms.auth.input-with-icon :readonly="true" placeholder="Harvey Specter" label="Name" name="name" :value="old('name') ?? $user->name">
                 <i class="fa-solid fa-user text-xl px-2 text-gray-300"></i>
             </x-forms.auth.input-with-icon>
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            <x-forms.auth.input-with-icon :disabled="true" :value="old('email') ?? $user->email" autocomplete="username" placeholder="specter@pearson-specter-litt.com" label="Email" name="email" type="email" class="mt-3">
+            <x-forms.auth.input-with-icon :readonly="true" :value="old('email') ?? $user->email" autocomplete="username" placeholder="specter@pearson-specter-litt.com" label="Email" name="email" type="email" class="mt-3">
                 <i class="fa-solid fa-envelope text-xl px-2 text-gray-300"></i>
             </x-forms.auth.input-with-icon>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />

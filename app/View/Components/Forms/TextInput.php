@@ -10,7 +10,7 @@ class TextInput extends Component
 
     public string $title;
 
-    public string $placeholder;
+    public string|null $placeholder;
 
     public string $type;
 

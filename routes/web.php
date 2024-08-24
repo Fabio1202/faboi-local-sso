@@ -101,7 +101,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{role:id}', [App\Http\Controllers\RoleController::class, 'show'])->name('roles.show')->can('manage-roles');
         Route::post('/{role:id}', [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update')->can('manage-roles');
     });
-});
 
     Route::group(['prefix' => 'passkeys'], function () {
         Route::get('/generate-registration-options', [\App\Http\Controllers\PasskeyController::class, 'generateRegistrationOptions'])->name('passkey.generate-registration-options');
