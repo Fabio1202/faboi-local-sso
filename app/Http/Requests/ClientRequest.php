@@ -17,7 +17,6 @@ class ClientRequest extends BaseRequest
         // @phpstan-ignore-next-line
         $tokenId = Configuration::forUnsecuredSigner()->parser()->parse($bearerToken)->claims()->get('jti');
 
-
         /** @var Client */
         // @phpstan-ignore-next-line
         return Token::find($tokenId)->client;

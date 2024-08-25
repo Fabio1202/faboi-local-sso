@@ -36,8 +36,12 @@
         @endforeach
     </x-card-view>
 
-    <x-forms.list :pagination="$users->links()" class="mt-6">
+    <x-forms.list  class="mt-6">
         <x-slot:title>Users</x-slot:title>
+
+        <x-slot:pagination>
+            {{ $users->links() }}
+        </x-slot:pagination>
 
         <x-slot:listEntries>
             @foreach($users as $user)

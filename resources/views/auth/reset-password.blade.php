@@ -1,16 +1,18 @@
 <x-auth-layout title="Update password">
+
     <form class="w-full p-6" method="POST" action="{{ route('password.update') }}">
         @csrf
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
-        <x-forms.auth.input-with-icon label="E-Mail" name="email" placeholder="robin@sparkles.com" type="email">
-            <i class="fa-solid fa-user text-xl px-2 text-gray-300"></i>
+        <input type="hidden" name="email" value="{{ $request['email'] }}">
+        <x-forms.auth.input-with-icon label="E-Mail" name="shown-email" placeholder="robin@sparkles.com" type="email" :value="$request['email']" :disabled="true">
+            <i class="fa-solid fa-user text-xl px-2 text-gray-200"></i>
         </x-forms.auth.input-with-icon>
         <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        <x-forms.auth.input-with-icon label="Password" name="password" placeholder="********" type="password" class="mt-3">
+        <x-forms.auth.input-with-icon label="New Password" name="password" placeholder="********" type="password" class="mt-3">
             <i class="fa-solid fa-lock text-xl px-2 text-gray-300"></i>
         </x-forms.auth.input-with-icon>
         <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        <x-forms.auth.input-with-icon label="Confirm Password" name="password_confirmation" placeholder="********" type="password" class="mt-3">
+        <x-forms.auth.input-with-icon label="Confirm new Password" name="password_confirmation" placeholder="********" type="password" class="mt-3">
             <i class="fa-solid fa-lock text-xl px-2 text-gray-300"></i>
         </x-forms.auth.input-with-icon>
         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />

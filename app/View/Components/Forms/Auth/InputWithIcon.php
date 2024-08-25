@@ -14,18 +14,20 @@ class InputWithIcon extends Component
 
     public string $placeholder;
 
-    public string|null $value;
+    public ?string $value;
 
     public string $autocomplete;
 
     public bool $autofocus;
+
+    public bool $readonly;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $label, string $name, string $type = 'text', string $placeholder = '', string|null $value = '', string $autocomplete = '', bool $autofocus = false)
+    public function __construct(string $label, string $name, string $type = 'text', string $placeholder = '', ?string $value = '', string $autocomplete = '', bool $autofocus = false, bool $readonly = false)
     {
         $this->label = $label;
         $this->name = $name;
@@ -34,6 +36,7 @@ class InputWithIcon extends Component
         $this->value = $value;
         $this->autocomplete = $autocomplete;
         $this->autofocus = $autofocus;
+        $this->readonly = $readonly;
     }
 
     /**
