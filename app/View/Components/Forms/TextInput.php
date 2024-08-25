@@ -16,19 +16,20 @@ class TextInput extends Component
 
     public string|null $value;
 
-    public $readonly;
+    public bool $readonly;
 
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
-     * @param  string  $title
-     * @param  string|null  $placeholder
-     * @param  string  $type
-     * @param  null|string  $value
+     * @param string $name
+     * @param string $title
+     * @param string|null $placeholder
+     * @param string $type
+     * @param string|null $value
+     * @param bool $readonly
      * @return void
      */
-    public function __construct($name, $title, $placeholder = null, $type = 'text', $value = "", $readonly = false)
+    public function __construct(string $name, string $title, string $placeholder = null, string $type = 'text', ?string $value = "", bool $readonly = false)
     {
         $this->name = $name;
         $this->title = $title;
