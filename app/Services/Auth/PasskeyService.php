@@ -122,7 +122,7 @@ class PasskeyService
             // Store the key in the database
 
             $key = new Passkey;
-            if(($json = json_encode($this->serializer->normalize($publicKeyCredentialSource))) === false) {
+            if (($json = json_encode($this->serializer->normalize($publicKeyCredentialSource))) === false) {
                 return json_encode(['success' => false]);
             }
             $key->keySource = $json;
@@ -191,7 +191,7 @@ class PasskeyService
 
             return [
                 'success' => true,
-                'redirect' => session()->get("url.intended", RouteServiceProvider::HOME)
+                'redirect' => session()->get('url.intended', RouteServiceProvider::HOME),
             ];
         }
 

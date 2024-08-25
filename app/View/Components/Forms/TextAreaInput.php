@@ -14,14 +14,14 @@ class TextAreaInput extends Component
 
     public bool $preventNewLines = false;
 
-    public string|null $value;
+    public ?string $value;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $name, string $title, ?string $placeholder = null, bool $preventNewLines = false, string|null $value = '')
+    public function __construct(string $name, string $title, ?string $placeholder = null, bool $preventNewLines = false, ?string $value = '')
     {
         $this->name = $name;
         $this->title = $title;

@@ -4,7 +4,6 @@ namespace App\View\Components\Roles;
 
 use App\Models\Application;
 use App\Models\Role;
-use App\Models\User;
 use Closure;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -20,16 +19,12 @@ class ShowRole extends Component
      */
     public array|Collection $applications;
 
-    /**
-     * @var Paginator
-     */
     public Paginator $users;
 
     /**
      * Create a new component instance.
      *
      * @param  Application[]|Collection  $applications
-     * @param  Paginator  $users
      */
     public function __construct(Role $role, array|Collection $applications, Paginator $users)
     {

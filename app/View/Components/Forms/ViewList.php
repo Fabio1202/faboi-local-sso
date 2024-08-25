@@ -2,13 +2,10 @@
 
 namespace App\View\Components\Forms;
 
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\Component;
 
 class ViewList extends Component
 {
-
-
     /**
      * Create a new component instance.
      *

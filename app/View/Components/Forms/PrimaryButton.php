@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Forms;
 
-use Illuminate\Routing\Route;
 use Illuminate\View\Component;
 
 class PrimaryButton extends Component

@@ -7,7 +7,6 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Laravel\Fortify\Fortify;
 
 class UserController extends Controller
 {
@@ -31,15 +30,16 @@ class UserController extends Controller
         ]);
     }
 
-    public function store() {
+    public function store()
+    {
         // Validate request
         $validated = request()->validate([
             'name' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email',
         ]);
 
         // Check if mail is unique
-        if(User::where('email', $validated['email'])->exists()) {
+        if (User::where('email', $validated['email'])->exists()) {
             return back()->withInput()->withErrors(['email' => 'Email already exists']);
         }
 
@@ -54,7 +54,8 @@ class UserController extends Controller
         return redirect()->route('users.show', $user->id);
     }
 
-    public function activate() {
+    public function activate()
+    {
         $user = User::where('uuid', request()->get('uuid'))->firstOrFail();
 
         return view('users.activate', [
@@ -62,10 +63,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function postActivate() {
+    public function postActivate()
+    {
         // Validate request
         $validated = request()->validate([
-            'password' => ['required', 'confirmed', Rules\Password::defaults()]
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         try {
             $user = User::where('uuid', Crypt::decryptString(request()->get('uuid')))->firstOrFail();
@@ -74,7 +76,7 @@ class UserController extends Controller
         }
 
         $user->update([
-            'password' => Hash::make($validated['password'])
+            'password' => Hash::make($validated['password']),
         ]);
 
         $user->sendEmailVerificationNotification();
@@ -83,15 +85,16 @@ class UserController extends Controller
 
     }
 
-    public function update(User $user) {
+    public function update(User $user)
+    {
         // Validate request
         $validated = request()->validate([
             'name' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email',
         ]);
 
         // Check if mail is unique
-        if(User::where('email', $validated['email'])->where('id', '!=', $user->id)->exists()) {
+        if (User::where('email', $validated['email'])->where('id', '!=', $user->id)->exists()) {
             return back()->withInput()->withErrors(['email' => 'Email already exists']);
         }
 

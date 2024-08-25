@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Application;
-use App\Models\PermissionGroup;
 use Illuminate\Console\Command;
 use Symfony\Component\Yaml\Yaml;
 
@@ -47,38 +46,38 @@ class CreateApplicationPermissions extends Command
 
         // Check if multiple permissions in the file have the same unique_name
         $uniqueNames = [];
-        foreach ($permissions["groups"] as $group => $data) {
-            foreach ($data["permissions"] as $permission => $permissionData) {
+        foreach ($permissions['groups'] as $group => $data) {
+            foreach ($data['permissions'] as $permission => $permissionData) {
                 if (in_array($permission, $uniqueNames)) {
-                    throw new \Exception("Multiple permissions with the same unique_name found in permissions.yml");
+                    throw new \Exception('Multiple permissions with the same unique_name found in permissions.yml');
                 }
                 $uniqueNames[] = $permission;
             }
         }
 
         // Loop through the permissions
-        foreach ($permissions["groups"] as $group => $data) {
+        foreach ($permissions['groups'] as $group => $data) {
             $foundGroup = $application->permissionGroups()->updateOrCreate([
                 'unique_name' => $group,
             ], [
-                'description' => $data["description"],
-                'name' => $data["name"]
+                'description' => $data['description'],
+                'name' => $data['name'],
             ]);
 
             $foundNames = [];
 
-            foreach ($data["permissions"] as $permission => $permissionData) {
+            foreach ($data['permissions'] as $permission => $permissionData) {
                 $foundGroup->permissions()->updateOrCreate([
                     'unique_name' => $permission,
                 ], [
-                    'description' => $permissionData["description"],
-                    'name' => $permissionData["name"]
+                    'description' => $permissionData['description'],
+                    'name' => $permissionData['name'],
                 ]);
 
                 // Remove unique name from array
                 $foundNames[] = $permission;
 
-                echo $foundGroup->unique_name . " " . $permission;
+                echo $foundGroup->unique_name.' '.$permission;
             }
 
             // Delete all permissions that are not in the file
@@ -92,7 +91,7 @@ class CreateApplicationPermissions extends Command
         }
 
         $groups = $application->permissionGroups()->get()->filter(function ($group) use ($permissions) {
-            return !array_key_exists($group->unique_name, $permissions["groups"]);
+            return ! array_key_exists($group->unique_name, $permissions['groups']);
         });
 
         // Delete all groups that are not in the file

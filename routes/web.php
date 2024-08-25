@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-
 Route::get('/users/activate', [App\Http\Controllers\UserController::class, 'activate'])->name('users.activate')->middleware('signed');
 Route::post('/users/activate', [App\Http\Controllers\UserController::class, 'postActivate'])->name('users.activate.post');
 
