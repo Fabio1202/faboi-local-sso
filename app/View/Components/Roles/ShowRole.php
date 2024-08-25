@@ -21,7 +21,7 @@ class ShowRole extends Component
     public array|Collection $applications;
 
     /**
-     * @var Collection|User[]
+     * @var Paginator
      */
     public Paginator $users;
 
@@ -29,7 +29,7 @@ class ShowRole extends Component
      * Create a new component instance.
      *
      * @param  Application[]|Collection  $applications
-     * @param  Collection|User[]  $users
+     * @param  Paginator  $users
      */
     public function __construct(Role $role, array|Collection $applications, Paginator $users)
     {

@@ -122,7 +122,10 @@ class PasskeyService
             // Store the key in the database
 
             $key = new Passkey;
-            $key->keySource = json_encode($this->serializer->normalize($publicKeyCredentialSource));
+            if(($json = json_encode($this->serializer->normalize($publicKeyCredentialSource))) === false) {
+                return json_encode(['success' => false]);
+            }
+            $key->keySource = $json;
             $key->aaguid = request()->get('id');
             auth()->user()->passkeys()->save($key);
 
@@ -177,7 +180,11 @@ class PasskeyService
                 null
             );
 
-            $passkey->keySource = json_encode($this->serializer->normalize($publicKeyCredentialSource));
+            if (($json = json_encode($this->serializer->normalize($publicKeyCredentialSource))) === false) {
+                return ['success' => false];
+            }
+
+            $passkey->keySource = $json;
             $passkey->save();
 
             auth()->login($passkey->user);
