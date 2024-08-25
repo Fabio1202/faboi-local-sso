@@ -6,7 +6,10 @@
     </x-slot>
 
     <div class="py-12">
-        <x-forms.list title="Registered Users" :pagination="$users->links()">
+        <x-forms.list title="Registered Users">
+            @slot('pagination')
+                {{$users->links()}}
+            @endslot
             @slot("button")
                 <a class="px-14 py-2 bg-primary text-white rounded-full" href="{{ route("users.create") }}">
                     <button class="">Add User</button>
