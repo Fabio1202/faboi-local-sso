@@ -3,15 +3,7 @@
 namespace Symfony\Component\Serializer;
 
 /** @noinspection all */
-class Serializer implements SerializerInterface, NormalizerInterface, DenormalizerInterface, ContextAwareEncoderInterface, ContextAwareDecoderInterface
+class Serializer
 {
-    public function serialize(mixed $data, string $format, array $context = []): string
-    {
-        return "";
-    }
 
-    public function deserialize(mixed $data, string $type, string $format, array $context = []): mixed
-    {
-        return "";
-    }
 }
