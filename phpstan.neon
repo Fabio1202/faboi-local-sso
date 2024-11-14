@@ -12,6 +12,8 @@ parameters:
     # Ignore errors
     ignoreErrors:
         -
+            identifier: missingType.iterableValue
+        -
             message: '#Method ([A-Za-z]+(\\[A-Za-z]+)+)::[A-Za-z]+\(\) should return bool\|Illuminate\\Auth\\Access\\Response but return statement is missing.#'
             path: app/Policies/*
         -
@@ -33,8 +35,6 @@ parameters:
 #
     excludePaths:
         - ./stubs/*
-
-    checkMissingIterableValueType: false
 
     stubFiles:
         - stubs/WebauthnSerializerFactory.stub
