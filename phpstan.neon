@@ -11,6 +11,9 @@ parameters:
 
     # Ignore errors
     ignoreErrors:
+        - '#Declaration of Larastan\\Larastan\\Types\\ViewStringType::accepts\(PHPStan\\Type\\Type \$type, bool \$strictTypes\): PHPStan\\TrinaryLogic must be compatible with PHPStan\\Type\\StringType::accepts\(PHPStan\\Type\\Type \$type, bool \$strictTypes\): PHPStan\\Type\\AcceptsResult#'
+        -
+            identifier: missingType.iterableValue
         -
             message: '#Method ([A-Za-z]+(\\[A-Za-z]+)+)::[A-Za-z]+\(\) should return bool\|Illuminate\\Auth\\Access\\Response but return statement is missing.#'
             path: app/Policies/*
@@ -34,8 +37,9 @@ parameters:
     excludePaths:
         - ./stubs/*
 
-    checkMissingIterableValueType: false
-
     stubFiles:
         - stubs/WebauthnSerializerFactory.stub
         - stubs/Serializer.stub
+
+    # Ignore errors
+    reportUnmatchedIgnoredErrors: false
