@@ -11,9 +11,7 @@ parameters:
 
     # Ignore errors
     ignoreErrors:
-        -
-            message: '#.*#'
-            path: vendor/*
+        - '#Declaration of Larastan\\Larastan\\Types\\ViewStringType::accepts\(PHPStan\\Type\\Type \$type, bool \$strictTypes\): PHPStan\\TrinaryLogic must be compatible with PHPStan\\Type\\StringType::accepts\(PHPStan\\Type\\Type \$type, bool \$strictTypes\): PHPStan\\Type\\AcceptsResult#'
         -
             identifier: missingType.iterableValue
         -
