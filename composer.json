@@ -20,6 +20,7 @@
         "web-auth/webauthn-symfony-bundle": "^5.0"
     },
     "require-dev": {
+        "phpstan/phpstan": "^1.10",
         "deployer/deployer": "^7.1",
         "enlightn/enlightn": "^2.10",
         "fakerphp/faker": "^1.9.1",
