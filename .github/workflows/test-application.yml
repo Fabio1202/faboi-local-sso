@@ -40,9 +40,8 @@ jobs:
 #        DB_CONNECTION: sqlite
 #        DB_DATABASE: database/database.sqlite
 #      run: vendor/bin/phpunit
-    - uses: php-actions/phpstan@v3
-      with:
-        path: app/
+    - name: PHPStan
+      run: vendor/bin/phpstan analyse --memory-limit=1G
     - name: Run Enlightn Checks and Trigger the Enlightn Bot
       if: ${{ github.event_name == 'pull_request' }}
       env:
