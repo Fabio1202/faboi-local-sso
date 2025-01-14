@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    //use HasFactory;
+    // use HasFactory;
 
     protected $guarded = [];
 
@@ -23,7 +23,7 @@ class Permission extends Model
 
     public function getPermissionGroupUniqueNameAttribute(): string
     {
-        //Check if permission group is already loaded
+        // Check if permission group is already loaded
         $unload = ! $this->relationLoaded('permissionGroup');
         $uniqueName = $this->permissionGroup->unique_name;
         if ($unload) {

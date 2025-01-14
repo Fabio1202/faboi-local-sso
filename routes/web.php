@@ -23,7 +23,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-//if(config('app.env') == 'local') {
+// if(config('app.env') == 'local') {
 /*Route::get('/test-auth-screen', function () {
     return view('vendor.passport.authorize', [
         'client' =>  new Client([
@@ -44,14 +44,14 @@ Route::get('/', function () {
         'authToken' => 'test-token',
     ]);
 });*/
-//}
+// }
 
-//Route::group(['middleware' => 'guest'], function () {
+// Route::group(['middleware' => 'guest'], function () {
 //    Route::get('/register', function () {
 //        return view('auth.register');
 //    })->name('register')->middleware('signed');
 //    Route::post('/register', [\Laravel\Fortify\Http\Controllers\RegisteredUserController::class, 'store'])->name('register.post');
-//});
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');

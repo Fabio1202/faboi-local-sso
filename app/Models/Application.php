@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    //use HasFactory;
+    // use HasFactory;
 
     protected $guarded = [];
 

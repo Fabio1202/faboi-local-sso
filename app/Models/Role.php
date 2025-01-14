@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class Role extends Model
 {
     use Searchable;
-    //use HasFactory;
+    // use HasFactory;
 
     protected $guarded = [];
 
