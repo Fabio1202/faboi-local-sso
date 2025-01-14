@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class PermissionGroup extends Model
 {
-    //use HasFactory;
+    // use HasFactory;
 
     protected $guarded = [];
 

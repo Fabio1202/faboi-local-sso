@@ -98,7 +98,7 @@ class PasskeyService
         // Map request()->all() to remove all \ from JSON
         $json = request()->all();
 
-        //dd(request()->getContent());
+        // dd(request()->getContent());
 
         $publicKeyCredential = $this->serializer->denormalize(
             $json,
@@ -108,14 +108,14 @@ class PasskeyService
 
         $publicKeyCredentialCreationOptions = session()->pull('passkey.create.options');
 
-        //dd($publicKeyCredential);
+        // dd($publicKeyCredential);
 
         if ($publicKeyCredential->response instanceof AuthenticatorAttestationResponse) {
             $authenticatorAttestationResponse = $publicKeyCredential->response;
             $publicKeyCredentialSource = $this->authenticatorAttestationResponseValidator->check(
                 $authenticatorAttestationResponse,
                 $publicKeyCredentialCreationOptions,
-                //request()
+                // request()
                 str_replace(['http://', 'https://'], '', config('app.url'))
             );
 
@@ -129,7 +129,7 @@ class PasskeyService
             $key->aaguid = request()->get('id');
             auth()->user()->passkeys()->save($key);
 
-            //return $this->serializer->normalize($publicKeyCredentialSource);
+            // return $this->serializer->normalize($publicKeyCredentialSource);
             return json_encode(['success' => true]);
         }
 
