@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Laravel\Passport\Client as BaseClient;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Passport\Client as BaseClient;
 
 class Client extends BaseClient
 {
