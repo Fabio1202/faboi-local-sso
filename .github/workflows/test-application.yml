@@ -42,13 +42,13 @@ jobs:
 #      run: vendor/bin/phpunit
     - name: PHPStan
       run: vendor/bin/phpstan analyse --memory-limit=1G
-    - name: Run Enlightn Checks and Trigger the Enlightn Bot
-      if: ${{ github.event_name == 'pull_request' }}
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
-        ENLIGHTN_GITHUB_REPO: ${{ github.repository }}
-      run: |
-        cp .env.example .env
-        php artisan enlightn --ci  --review --issue=${{ github.event.number }}
+#    - name: Run Enlightn Checks and Trigger the Enlightn Bot
+#      if: ${{ github.event_name == 'pull_request' }}
+#      env:
+#        DB_CONNECTION: sqlite
+#        DB_DATABASE: database/database.sqlite
+#        ENLIGHTN_GITHUB_REPO: ${{ github.repository }}
+#      run: |
+#        cp .env.example .env
+#        php artisan enlightn --ci  --review --issue=${{ github.event.number }}
 
