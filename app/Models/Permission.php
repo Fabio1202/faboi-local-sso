@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Permission extends Model
 {
@@ -33,7 +34,12 @@ class Permission extends Model
         return $uniqueName;
     }
 
-    public function permissionGroup(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    /**
+     * Get the permission group that owns the permission.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\PermissionGroup, $this>
+     */
+    public function permissionGroup(): BelongsTo
     {
         return $this->belongsTo(PermissionGroup::class);
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Laravel\Passport\Client as BaseClient;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Client extends BaseClient
 {
@@ -14,7 +15,12 @@ class Client extends BaseClient
         return $this->firstParty() || $this->application->first_party;
     }
 
-    public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    /**
+     * Get the application that owns the client.
+     *
+     * @return BelongsTo<\App\Models\Application, $this>
+     */
+    public function application(): BelongsTo
     {
         return $this->belongsTo(Application::class);
     }

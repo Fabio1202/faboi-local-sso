@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Application;
 use App\Models\Client;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request as BaseRequest;
 use Laravel\Passport\Token;
 use Lcobucci\JWT\Configuration;
