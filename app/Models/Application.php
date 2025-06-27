@@ -60,12 +60,15 @@ class Application extends Model
         // Add permissions of each permission group to the application
         $permissions = [];
         foreach ($this->permissionGroups as $group) {
+            // Assert instanceof
+            assert($group instanceof \App\Models\PermissionGroup, 'Permission group must be an instance of \App\Models\PermissionGroup');
+
             foreach ($group->permissions as $permission) {
                 $permissions[] = $permission;
             }
         }
 
-        return collect($permissions);
+        return collect($permissions); // @phpstan-ignore argument.templateType
     }
 
     public function permissionGroups(): \Illuminate\Database\Eloquent\Relations\HasMany
