@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Application;
+use App\Models\PermissionGroup;
 use Illuminate\Console\Command;
 use Symfony\Component\Yaml\Yaml;
 
@@ -46,7 +47,7 @@ class CreateApplicationPermissions extends Command
 
         // Check if multiple permissions in the file have the same unique_name
         $uniqueNames = [];
-        foreach ($permissions['groups'] as $group => $data) {
+        foreach ($permissions['groups'] as $data) {
             foreach ($data['permissions'] as $permission => $permissionData) {
                 if (in_array($permission, $uniqueNames)) {
                     throw new \Exception('Multiple permissions with the same unique_name found in permissions.yml');
@@ -63,6 +64,11 @@ class CreateApplicationPermissions extends Command
                 'description' => $data['description'],
                 'name' => $data['name'],
             ]);
+
+            // Cast to Model
+            if (! $foundGroup instanceof \App\Models\PermissionGroup) {
+                throw new \Exception('Failed to cast found group to PermissionGroup model');
+            }
 
             $foundNames = [];
 
@@ -82,6 +88,11 @@ class CreateApplicationPermissions extends Command
 
             // Delete all permissions that are not in the file
             $delPermissions = $foundGroup->permissions()->get()->filter(function ($permission) use ($foundNames) {
+                // Cast to Model
+                if (! $permission instanceof \App\Models\Permission) {
+                    throw new \Exception('Failed to cast permission to Permission model');
+                }
+
                 return ! in_array($permission->unique_name, $foundNames);
             });
 
@@ -91,6 +102,11 @@ class CreateApplicationPermissions extends Command
         }
 
         $groups = $application->permissionGroups()->get()->filter(function ($group) use ($permissions) {
+            // Cast to Model
+            if (! $group instanceof PermissionGroup) {
+                throw new \Exception('Failed to cast group to PermissionGroup model');
+            }
+
             return ! array_key_exists($group->unique_name, $permissions['groups']);
         });
 

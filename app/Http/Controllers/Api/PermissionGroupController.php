@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest as Request;
+use App\Models\Permission;
 use App\Models\PermissionGroup;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -78,7 +79,8 @@ class PermissionGroupController extends Controller
         }
         foreach ($permissions as $permission) {
             $tmp = $permissionGroup->permissions()->where('unique_name', $permission['unique_name'])->first();
-            if (! $tmp) {
+
+            if (! $tmp instanceof Permission) {
                 $tmp = $permissionGroup->permissions()->create([
                     'name' => $permission['name'],
                     'description' => $permission['description'],
