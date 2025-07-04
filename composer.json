@@ -15,6 +15,7 @@
         "laravel/scout": "^10.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^3.4",
+        "ronvanderheijden/openid-connect": "^1.2.1",
         "symfony/yaml": "^7.1",
         "web-auth/webauthn-lib": "^5.0",
         "web-auth/webauthn-stimulus": "^5.0",
