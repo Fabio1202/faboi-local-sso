@@ -46,7 +46,7 @@ return [
      * The signer to be used
      * Can be Ecdsa, Hmac or RSA
      */
-    'signer' => \Cose\Algorithm\Signature\RSA\RS256::class,
+    'signer' => \Lcobucci\JWT\Signer\Rsa\Sha256::class,
 
     'routes' => [
         /**
