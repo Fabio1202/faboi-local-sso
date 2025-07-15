@@ -16,7 +16,7 @@ Route::get('/oauth/userinfo', function (Request $request) {
         'sub'                 => (string) $user->getAuthIdentifier(),
         // optionale Standard-Claims:
         'name'                => $user->name,
-        'preferred_username'  => $user->username ?? null,
+        'preferred_username'  => str_replace(' ', '', strtolower($user->name)), // z.B. "fabio.boi"
         'email'               => $user->email,
         'email_verified'      => (bool) $user->hasVerifiedEmail(),
         'updated_at'          => $user->updated_at?->toIso8601String(),
