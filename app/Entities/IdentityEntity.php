@@ -24,7 +24,7 @@ protected User $user;
 public function setIdentifier($identifier): void
 {
 $this->identifier = $identifier;
-$this->user = User::findOrFail($identifier);
+$this->user = User::firstOrFail($identifier);
 }
 
 /**
