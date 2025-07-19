@@ -12,12 +12,10 @@ php artisan migrate --force
 
 php artisan key:generate
 php artisan storage:link
-#php artisan config:cache
+php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 php artisan optimize
-
-php artisan config:clear
 
 php artisan permissions:update
 
