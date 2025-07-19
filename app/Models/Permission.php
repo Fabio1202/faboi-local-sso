@@ -18,27 +18,6 @@ class Permission extends Model
         'permission_group',
     ];
 
-    protected $appends = [
-        'permission_group_unique_name',
-    ];
-
-    public function getPermissionGroupUniqueNameAttribute(): string
-    {
-        // Check if permission group is already loaded
-        $unload = ! $this->relationLoaded('permissionGroup');
-        $uniqueName = $this->permissionGroup->unique_name;
-        if ($unload) {
-            $this->unsetRelation('permissionGroup');
-        }
-
-        return $uniqueName;
-    }
-
-    /**
-     * Get the permission group that owns the permission.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\PermissionGroup, $this>
-     */
     public function permissionGroup(): BelongsTo
     {
         return $this->belongsTo(PermissionGroup::class);

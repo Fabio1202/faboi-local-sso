@@ -35,6 +35,7 @@ class TextAreaInput extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
+    #[\Override]
     public function render()
     {
         return view('components.forms.text-area-input');

@@ -11,7 +11,12 @@ use Illuminate\Support\Collection;
 
 class PermissionGroupController extends Controller
 {
-    public function store(Request $request): PermissionGroup
+    /**
+     * @return PermissionGroup|\Illuminate\Database\Eloquent\Builder
+     *
+     * @psalm-return PermissionGroup|\Illuminate\Database\Eloquent\Builder<PermissionGroup>
+     */
+    public function store(Request $request): \Illuminate\Database\Eloquent\Builder|PermissionGroup
     {
         $application = $request->application();
 

@@ -23,6 +23,7 @@ class ListEntry extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
+    #[\Override]
     public function render(): \Illuminate\Contracts\View\View|string|\Closure|\Illuminate\View\View
     {
         return view('components.forms.list-entry');

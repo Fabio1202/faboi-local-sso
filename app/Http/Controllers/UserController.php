@@ -10,7 +10,7 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         // Return view with paginated users
         return view('users.view-all', [
@@ -18,19 +18,19 @@ class UserController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('users.create', []);
     }
 
-    public function show(User $user)
+    public function show(User $user): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('users.index', [
             'user' => $user,
         ]);
     }
 
-    public function store()
+    public function store(): \Illuminate\Http\RedirectResponse
     {
         // Validate request
         $validated = request()->validate([
@@ -54,7 +54,7 @@ class UserController extends Controller
         return redirect()->route('users.show', $user->id);
     }
 
-    public function activate()
+    public function activate(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         $user = User::where('uuid', request()->get('uuid'))->firstOrFail();
 
@@ -63,7 +63,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function postActivate()
+    public function postActivate(): \Illuminate\Http\RedirectResponse
     {
         // Validate request
         $validated = request()->validate([
@@ -85,7 +85,7 @@ class UserController extends Controller
 
     }
 
-    public function update(User $user)
+    public function update(User $user): \Illuminate\Http\RedirectResponse
     {
         // Validate request
         $validated = request()->validate([

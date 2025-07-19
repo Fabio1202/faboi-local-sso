@@ -30,6 +30,7 @@ $this->user = User::firstOrFail($identifier);
 /**
 * When building the id_token, this entity's claims are collected
 */
+#[\Override]
 public function getClaims(): array
 {
 return [

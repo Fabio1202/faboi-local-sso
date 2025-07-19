@@ -1,4 +1,5 @@
 <?php
+/** @psalm-suppress UnusedClass */
 
 namespace App\View\Components;
 
@@ -18,6 +19,7 @@ class AuthLayout extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
+    #[\Override]
     public function render()
     {
         return view('layouts.auth');

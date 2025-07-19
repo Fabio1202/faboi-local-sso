@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.13.0@70cdf647255a1362b426bb0f522a85817b8c791c">
+  <file src="app/Actions/Fortify/CreateNewUser.php">
+    <MoreSpecificImplementedParamType>
+      <code><![CDATA[$input]]></code>
+    </MoreSpecificImplementedParamType>
+  </file>
+  <file src="app/Actions/Fortify/UpdateUserPassword.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[update]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="app/Actions/Fortify/UpdateUserProfileInformation.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[update]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="app/Console/Commands/CreateApplicationPermissions.php">
+    <UndefinedMagicPropertyFetch>
+      <code><![CDATA[$permission->unique_name]]></code>
+    </UndefinedMagicPropertyFetch>
+    <UnusedClass>
+      <code><![CDATA[CreateApplicationPermissions]]></code>
+    </UnusedClass>
+    <UnusedForeachValue>
+      <code><![CDATA[$permissionData]]></code>
+    </UnusedForeachValue>
+  </file>
+  <file src="app/Entities/IdentityEntity.php">
+    <UnusedClass>
+      <code><![CDATA[IdentityEntity]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Exceptions/Handler.php">
+    <UnusedClosureParam>
+      <code><![CDATA[$e]]></code>
+    </UnusedClosureParam>
+  </file>
+  <file src="app/Http/Controllers/Api/PermissionGroupController.php">
+    <InvalidNullableReturnType>
+      <code><![CDATA[Collection]]></code>
+    </InvalidNullableReturnType>
+    <NullableReturnStatement>
+      <code><![CDATA[$permissionGroup->permissions]]></code>
+    </NullableReturnStatement>
+    <UndefinedMagicMethod>
+      <code><![CDATA[PermissionGroup::whereNotIn('unique_name', $permGroupUniqueNames)]]></code>
+    </UndefinedMagicMethod>
+    <UndefinedMagicPropertyAssignment>
+      <code><![CDATA[$tmp->description]]></code>
+      <code><![CDATA[$tmp->name]]></code>
+    </UndefinedMagicPropertyAssignment>
+    <UnusedClass>
+      <code><![CDATA[PermissionGroupController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/Auth/AuthenticatedSessionController.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[logout]]></code>
+    </UndefinedInterfaceMethod>
+    <UnusedClass>
+      <code><![CDATA[AuthenticatedSessionController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/Auth/ConfirmablePasswordController.php">
+    <UnusedClass>
+      <code><![CDATA[ConfirmablePasswordController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/Auth/EmailVerificationNotificationController.php">
+    <UnusedClass>
+      <code><![CDATA[EmailVerificationNotificationController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/Auth/EmailVerificationPromptController.php">
+    <UnusedClass>
+      <code><![CDATA[EmailVerificationPromptController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/Auth/NewPasswordController.php">
+    <UnusedClass>
+      <code><![CDATA[NewPasswordController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/Auth/PasswordResetLinkController.php">
+    <UnusedClass>
+      <code><![CDATA[PasswordResetLinkController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/Auth/RegisteredUserController.php">
+    <UnusedClass>
+      <code><![CDATA[RegisteredUserController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/Auth/VerifyEmailController.php">
+    <UnusedClass>
+      <code><![CDATA[VerifyEmailController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/ClientController.php">
+    <UndefinedMagicPropertyFetch>
+      <code><![CDATA[$client->application_id]]></code>
+    </UndefinedMagicPropertyFetch>
+    <UnusedClass>
+      <code><![CDATA[ClientController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/PasskeyController.php">
+    <UnusedClass>
+      <code><![CDATA[PasskeyController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/RoleController.php">
+    <UnusedClass>
+      <code><![CDATA[RoleController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Controllers/UserController.php">
+    <UnusedClass>
+      <code><![CDATA[UserController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Http/Middleware/AllowOnlyClientsAuthentication.php">
+    <UndefinedMagicPropertyFetch>
+      <code><![CDATA[$token->user_id]]></code>
+    </UndefinedMagicPropertyFetch>
+  </file>
+  <file src="app/Http/Middleware/ValidateSignature.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$except]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="app/Http/Requests/ClientRequest.php">
+    <InvalidNullableReturnType>
+      <code><![CDATA[Application]]></code>
+    </InvalidNullableReturnType>
+    <NullableReturnStatement>
+      <code><![CDATA[$this->client()->application]]></code>
+    </NullableReturnStatement>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[claims]]></code>
+    </UndefinedInterfaceMethod>
+    <UndefinedMagicPropertyFetch>
+      <code><![CDATA[Token::find($tokenId)->client]]></code>
+    </UndefinedMagicPropertyFetch>
+  </file>
+  <file src="app/Models/Client.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[application]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="app/Models/Permission.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[permissionGroup]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="app/Models/Role.php">
+    <InvalidDocblock>
+      <code><![CDATA[public function permissions(): BelongsToMany]]></code>
+      <code><![CDATA[public function users(): BelongsToMany]]></code>
+    </InvalidDocblock>
+  </file>
+  <file src="app/Models/User.php">
+    <InvalidDocblock>
+      <code><![CDATA[public function roles(): BelongsToMany]]></code>
+    </InvalidDocblock>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[hasPermission]]></code>
+      <code><![CDATA[hasRole]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="app/Notifications/Auth/UserCreated.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$notifiable]]></code>
+      <code><![CDATA[$notifiable]]></code>
+      <code><![CDATA[$notifiable]]></code>
+    </PossiblyUnusedParam>
+    <UndefinedMagicPropertyFetch>
+      <code><![CDATA[$this->user->uuid]]></code>
+    </UndefinedMagicPropertyFetch>
+  </file>
+  <file src="app/Policies/ApplicationPolicy.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$application]]></code>
+      <code><![CDATA[$application]]></code>
+      <code><![CDATA[$application]]></code>
+      <code><![CDATA[$application]]></code>
+      <code><![CDATA[$user]]></code>
+      <code><![CDATA[$user]]></code>
+      <code><![CDATA[$user]]></code>
+      <code><![CDATA[$user]]></code>
+      <code><![CDATA[$user]]></code>
+      <code><![CDATA[$user]]></code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code><![CDATA[ApplicationPolicy]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Providers/FortifyServiceProvider.php">
+    <UnusedClass>
+      <code><![CDATA[FortifyServiceProvider]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/Services/Auth/PasskeyService.php">
+    <UndefinedMagicPropertyAssignment>
+      <code><![CDATA[$key->aaguid]]></code>
+      <code><![CDATA[$key->keySource]]></code>
+      <code><![CDATA[$passkey->keySource]]></code>
+    </UndefinedMagicPropertyAssignment>
+    <UndefinedMagicPropertyFetch>
+      <code><![CDATA[$passkey->keySource]]></code>
+      <code><![CDATA[request()->user()->uuid]]></code>
+    </UndefinedMagicPropertyFetch>
+  </file>
+  <file src="app/View/Components/AuthLayout.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[AuthLayout]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/CardView.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[CardView]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/DropDown/GroupExtend.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[GroupExtend]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/DropDown/GroupItem.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[GroupItem]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Forms/Auth/InputWithIcon.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[InputWithIcon]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Forms/ListEntry.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[ListEntry]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Forms/PopUp/Card.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[Card]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Forms/PopUp/PopUpButton.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[PopUpButton]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Forms/PrimaryButton.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[PrimaryButton]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Forms/TextAreaInput.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[TextAreaInput]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Forms/TextInput.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[TextInput]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Forms/ViewList.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[\Illuminate\Contracts\View\View|\Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[ViewList]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/GuestLayout.php">
+    <UnusedClass>
+      <code><![CDATA[GuestLayout]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Roles/ShowRole.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[View|Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[ShowRole]]></code>
+    </UnusedClass>
+  </file>
+  <file src="app/View/Components/Users/ShowUser.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[View|Closure|string]]></code>
+    </ImplicitToStringCast>
+    <UnusedClass>
+      <code><![CDATA[ShowUser]]></code>
+    </UnusedClass>
+  </file>
+  <file src="database/seeders/DatabaseSeeder.php">
+    <UnusedClass>
+      <code><![CDATA[DatabaseSeeder]]></code>
+    </UnusedClass>
+  </file>
+</files>
