@@ -94,7 +94,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasPermission(string $permission): bool
     {
-        $application = Application::where('name', 'auth')->first();
+        $application = Application::where('name', 'Auth')->first();
 
         return $this->permissions($application)->contains($permission);
     }

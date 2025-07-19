@@ -37,7 +37,7 @@ return new class extends Migration
                 'name' => 'view',
                 'description' => 'View the application',
             ]);
-            $role = Role::where('name', 'admin')->first();
+            $role = Role::where('name', 'Admin')->first();
             $role->permissions()->attach($permission);
             $application->save();
         });

@@ -22,12 +22,12 @@ return new class extends Migration
 
         // Update permissions table
         Schema::table('permissions', function (Blueprint $table) {
-            $table->foreignId('permission_group_id')->nullable()->constrained();
+            $table->foreignId('permission_group_id')->references('id')->on('permission_groups')->onDelete('cascade');
         });
 
         // Give users an unique uuid
         Schema::table('users', function (Blueprint $table) {
-            $table->uuid()->unique();
+            $table->uuid()->unique()->default("");
         });
 
         \App\Models\User::all()->each(function ($user) {
