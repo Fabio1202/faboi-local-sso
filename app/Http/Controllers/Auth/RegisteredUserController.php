@@ -15,8 +15,6 @@ class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
-     *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function create(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {

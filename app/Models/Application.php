@@ -18,7 +18,6 @@ use Illuminate\Support\Collection;
  * @property bool $first_party Indicates if the application is a first-party application.
  * @property Collection<int, \App\Models\PermissionGroup> $permissionGroups The permission groups associated with the application.
  **/
-
 class Application extends Model
 {
     // use HasFactory;
@@ -61,7 +60,7 @@ class Application extends Model
         $permissions = [];
         foreach ($this->permissionGroups as $group) {
             // Assert instanceof
-            #assert($group instanceof \App\Models\PermissionGroup, 'Permission group must be an instance of \App\Models\PermissionGroup');
+            // assert($group instanceof \App\Models\PermissionGroup, 'Permission group must be an instance of \App\Models\PermissionGroup');
 
             foreach ($group->permissions as $permission) {
                 $permissions[] = $permission;

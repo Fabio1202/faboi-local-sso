@@ -1,4 +1,5 @@
 <?php
+
 /** @psalm-suppress UnusedClass */
 
 namespace App\View\Components;

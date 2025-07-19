@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Passkey
@@ -18,7 +17,4 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $updated_at The timestamp when the passkey was last updated.
  * @property \App\Models\User $user The user associated with the passkey.
  */
-class Passkey extends Model
-{
-
-}
+class Passkey extends Model {}

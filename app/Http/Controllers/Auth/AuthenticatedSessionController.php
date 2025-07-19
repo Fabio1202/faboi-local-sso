@@ -1,4 +1,6 @@
-<?php /** @noinspection ALL */
+<?php
+
+/** @noinspection ALL */
 
 namespace App\Http\Controllers\Auth;
 
@@ -13,8 +15,6 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
-     *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function create(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {

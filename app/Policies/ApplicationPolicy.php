@@ -1,7 +1,10 @@
-<?php /** @noinspection ALL */
+<?php
+
+/** @noinspection ALL */
 
 /**
  * @noinspection PhpStanGlobal
+ *
  * @psalm-suppress all
  */
 
@@ -13,6 +16,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
  * @noinspection PhpStanGlobal
+ *
  * @psalm-suppress all
  */
 class ApplicationPolicy
