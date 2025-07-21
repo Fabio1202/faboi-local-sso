@@ -27,12 +27,16 @@ return new class extends Migration
 
         // Give users an unique uuid
         Schema::table('users', function (Blueprint $table) {
-            $table->uuid()->unique()->default('');
+            $table->uuid()->unique()->nullable();
         });
 
         \App\Models\User::all()->each(function ($user) {
             $user->uuid = Str::uuid();
             $user->save();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->uuid()->unique()->nullable(false)->change();
         });
     }
 

@@ -27,7 +27,7 @@ class IdentityEntity implements IdentityEntityInterface
     public function setIdentifier($identifier): void
     {
         $this->identifier = $identifier;
-        $this->user = User::firstOrFail($identifier);
+        $this->user = User::where('id', $identifier)->firstOrFail();
     }
 
     /**
