@@ -19,12 +19,12 @@ use Laravel\Passport\HasApiTokens;
  * @property string $email The email address of the user.
  * @property string $password The hashed password of the user.
  * @property \Illuminate\Support\Carbon|null $email_verified_at The timestamp when the user's email was verified.
- *                                                              * @property string|null $remember_token The token used for "remember me" functionality.
- *                                                              * @property string|null $uuid The unique identifier for the user.
- *                                                              * @property \Illuminate\Support\Carbon|null $created_at The timestamp when the user was created.
- *                                                              * @property \Illuminate\Support\Carbon|null $updated_at The timestamp when the user was last updated.
+ * @property string|null $remember_token The token used for "remember me" functionality.
+ * @property string|null $uuid The unique identifier for the user.
+ * @property \Illuminate\Support\Carbon|null $created_at The timestamp when the user was created.
+ * @property \Illuminate\Support\Carbon|null $updated_at The timestamp when the user was last updated.
  *
- **/
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
