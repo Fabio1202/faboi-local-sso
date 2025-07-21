@@ -10,10 +10,8 @@ class PasswordResetLinkController extends Controller
 {
     /**
      * Display the password reset link request view.
-     *
-     * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('auth.forgot-password');
     }

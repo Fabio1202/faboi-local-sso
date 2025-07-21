@@ -34,7 +34,7 @@ class CreateApplicationPermissions extends Command
         $permissions = Yaml::parseFile(base_path('permissions.yml'));
 
         // Find this application
-        $application = Application::where('name', 'auth')->first();
+        $application = Application::where('name', 'Auth')->first();
 
         // if groups do not contain application, throw error
         if (! array_key_exists('application', $permissions['groups'])) {

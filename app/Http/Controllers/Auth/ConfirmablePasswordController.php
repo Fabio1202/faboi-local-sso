@@ -12,10 +12,8 @@ class ConfirmablePasswordController extends Controller
 {
     /**
      * Show the confirm password view.
-     *
-     * @return \Illuminate\View\View
      */
-    public function show()
+    public function show(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('auth.confirm-password');
     }

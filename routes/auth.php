@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\PasswordResetLinkController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
     ->middleware(['guest:'.config('fortify.guard')])
@@ -13,13 +13,13 @@ Route::get('/oauth/userinfo', function (Request $request) {
 
     return response()->json([
         // Pflicht-Claim: Subjekt-Identifier
-        'sub'                 => (string) $user->getAuthIdentifier(),
+        'sub' => (string) $user->getAuthIdentifier(),
         // optionale Standard-Claims:
-        'name'                => $user->name,
-        'preferred_username'  => str_replace(' ', '', strtolower($user->name)), // z.B. "fabio.boi"
-        'email'               => $user->email,
-        'email_verified'      => (bool) $user->hasVerifiedEmail(),
-        'updated_at'          => $user->updated_at?->toIso8601String(),
+        'name' => $user->name,
+        'preferred_username' => str_replace(' ', '', strtolower($user->name)), // z.B. "fabio.boi"
+        'email' => $user->email,
+        'email_verified' => (bool) $user->hasVerifiedEmail(),
+        'updated_at' => $user->updated_at?->toIso8601String(),
         // eigene Claims:
         // 'roles'           => $user->roles->pluck('name'),
     ], 200, ['Cache-Control' => 'no-store', 'Pragma' => 'no-cache']);

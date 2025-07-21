@@ -23,7 +23,7 @@ return new class extends Migration
         Schema::create('permission_role', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('permission_id')->constrained();
+            $table->foreignId('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->foreignId('role_id')->constrained();
         });
 
