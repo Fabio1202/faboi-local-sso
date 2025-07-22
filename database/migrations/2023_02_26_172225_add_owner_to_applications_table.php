@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->foreignId('owner_id');
+            $table->foreignId('owner_id')->nullable();
         });
 
         $user = User::where('email', 'fabio.boi@icloud.com')->first();
@@ -26,6 +26,7 @@ return new class extends Migration
         });
 
         Schema::table('applications', function (Blueprint $table) {
+            $table->foreignId('owner_id')->nullable(false)->change();
             $table->foreign('owner_id')->references('id')->on('users');
         });
     }

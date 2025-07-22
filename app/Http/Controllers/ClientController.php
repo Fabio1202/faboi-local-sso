@@ -8,12 +8,12 @@ use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
-    public function create(Application $application)
+    public function create(Application $application): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('clients.create', compact('application'));
     }
 
-    public function store()
+    public function store(): \Illuminate\Http\RedirectResponse
     {
         $values = request()->validate([
             'name' => 'required',
@@ -47,14 +47,14 @@ class ClientController extends Controller
         return redirect()->route('clients.show-secret');
     }
 
-    public function destroy(Client $client)
+    public function destroy(Client $client): \Illuminate\Http\RedirectResponse
     {
         $client->delete();
 
         return redirect()->route('applications.show', $client->application_id);
     }
 
-    public function showSecret()
+    public function showSecret(): \Illuminate\View\View|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
     {
         $client = session()->pull('client');
 

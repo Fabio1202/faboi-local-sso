@@ -7,6 +7,7 @@ use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 
 class AllowOnlyClientsAuthentication extends CheckClientCredentials
 {
+    #[\Override]
     protected function validateCredentials($token)
     {
         parent::validateCredentials($token);

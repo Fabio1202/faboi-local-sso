@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use Illuminate\Support\Facades\Gate;
 
+/** @psalm-suppress UnusedClass */
 class ApplicationController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         // Show paginated list of applications
         return view('applications.index', [
@@ -15,7 +16,7 @@ class ApplicationController extends Controller
         ]);
     }
 
-    public function show(\App\Models\Application $application)
+    public function show(\App\Models\Application $application): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         Gate::authorize('view', $application);
 
@@ -25,7 +26,7 @@ class ApplicationController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(): \Illuminate\Http\RedirectResponse
     {
         $req = request()->validate([
             'name' => 'required',
@@ -45,7 +46,7 @@ class ApplicationController extends Controller
         return redirect()->route('applications.index');
     }
 
-    public function create()
+    public function create(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('applications.create');
     }

@@ -21,6 +21,7 @@ class ViewList extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
+    #[\Override]
     public function render()
     {
         return view('components.forms.list');
