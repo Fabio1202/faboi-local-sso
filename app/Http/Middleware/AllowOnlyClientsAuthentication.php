@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Laravel\Passport\Exceptions\AuthenticationException;
-use Laravel\Passport\Http\Middleware\CheckClientCredentials;
+use Laravel\Passport\Http\Middleware\CheckToken;
 
-class AllowOnlyClientsAuthentication extends CheckClientCredentials
+class AllowOnlyClientsAuthentication extends CheckToken
 {
     #[\Override]
     protected function validateCredentials($token)
