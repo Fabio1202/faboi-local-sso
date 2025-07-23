@@ -2,17 +2,21 @@
 
 namespace App\Http\Middleware;
 
+use Laravel\Passport\Contracts\ScopeAuthorizable;
 use Laravel\Passport\Exceptions\AuthenticationException;
 use Laravel\Passport\Http\Middleware\CheckToken;
+use Illuminate\Http\Request;
 
 class AllowOnlyClientsAuthentication extends CheckToken
 {
     #[\Override]
-    protected function validateCredentials($token)
+    protected function validate(ScopeAuthorizable $token, string ...$params): void
     {
-        parent::validateCredentials($token);
-        if ($token->user_id !== null) {
-            throw new AuthenticationException;
-        }
+        throw new AuthenticationException;
+
+//        parent::validate($token, ...$params);
+//        if ($token->user_id !== null) {
+//            throw new AuthenticationException;
+//        }
     }
 }
