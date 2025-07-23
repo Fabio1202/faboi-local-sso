@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Laravel\Passport\Contracts\OAuthenticatable;
 use Laravel\Passport\HasApiTokens;
 
 /**
@@ -25,7 +26,7 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Support\Carbon|null $updated_at The timestamp when the user was last updated.
  *
  */
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, OAuthenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 

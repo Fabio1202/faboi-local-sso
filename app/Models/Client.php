@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Passport\Client as BaseClient;
 
@@ -21,7 +22,7 @@ class Client extends BaseClient
      * Determine if the client should skip the authorization prompt.
      */
     #[\Override]
-    public function skipsAuthorization(): bool
+    public function skipsAuthorization(Authenticatable $user, array $scopes): bool
     {
         return $this->firstParty() || $this->application->first_party;
     }

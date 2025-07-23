@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        Passport::hashClientSecrets();
+        // Passport::hashClientSecrets();
 
         // Register PasskeyService
         $this->app->singleton(\App\Services\Auth\PasskeyService::class, function () {

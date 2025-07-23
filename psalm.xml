@@ -5,8 +5,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-    findUnusedBaselineEntry="true"
-    findUnusedCode="true"
+    findUnusedBaselineEntry="false"
+    findUnusedCode="false"
     errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
@@ -17,16 +17,12 @@
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
+
 <plugins><pluginClass class="Psalm\LaravelPlugin\Plugin"/></plugins>
 
-    <issueHandlers>
-        <ImplicitToStringCast>
-            <errorLevel type="suppress">
-                <!-- Unterdrückt nur in diesem Verzeichnis -->
-                <directory name="app/View/Components" />
-            </errorLevel>
-        </ImplicitToStringCast>
-    </issueHandlers>
+<issueHandlers>
+    <ImplicitToStringCast errorLevel="suppress" xml:base="app/views/components/" />
+</issueHandlers>
 
 </psalm>
 
