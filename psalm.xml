@@ -26,6 +26,9 @@
                 <directory name="app/View/Components" />
             </errorLevel>
         </ImplicitToStringCast>
+        <UnusedBaselineEntry>
+            <errorLevel type="suppress"></errorLevel>
+        </UnusedBaselineEntry>
     </issueHandlers>
 
 </psalm>
