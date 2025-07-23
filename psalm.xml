@@ -17,17 +17,12 @@
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
+
 <plugins><pluginClass class="Psalm\LaravelPlugin\Plugin"/></plugins>
 
-    <issueHandlers>
-        <ImplicitToStringCast>
-            <errorLevel type="suppress">
-                <!-- Unterdrückt nur in diesem Verzeichnis -->
-                <directory name="app/View/Components" />
-            </errorLevel>
-        </ImplicitToStringCast>
-        <UnusedBaselineEntry errorLevel="suppress"></UnusedBaselineEntry>
-    </issueHandlers>
+<issueHandlers>
+  <UnusedBaselineEntry errorLevel="suppress" />
+</issueHandlers>
 
 </psalm>
 
