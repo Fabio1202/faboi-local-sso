@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * Class User
+ *
+ * @property int $id The unique identifier for the user.
+ * @property string $name The name of the user.
+ * @property string $email The email address of the user.
+ * @property string $password The hashed password of the user.
+ * @property \Illuminate\Support\Carbon|null $email_verified_at The timestamp when the user's email was verified.
+ * @property string|null $remember_token The token used for "remember me" functionality.
+ * @property string|null $uuid The unique identifier for the user.
+ * @property \Illuminate\Support\Carbon|null $created_at The timestamp when the user was created.
+ * @property \Illuminate\Support\Carbon|null $updated_at The timestamp when the user was last updated.
+ *
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -45,6 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    #[\Override]
     public static function boot(): void
     {
         parent::boot();
@@ -94,7 +109,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasPermission(string $permission): bool
     {
-        $application = Application::where('name', 'auth')->first();
+        $application = Application::where('name', 'Auth')->first();
 
         return $this->permissions($application)->contains($permission);
     }

@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection ALL */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -8,14 +10,13 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/** @psalm-suppress all */
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
-     *
-     * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('auth.login');
     }

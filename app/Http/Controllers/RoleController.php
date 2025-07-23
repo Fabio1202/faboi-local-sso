@@ -8,14 +8,14 @@ use App\Models\User;
 
 class RoleController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         $roles = Role::paginate(20);
 
         return view('roles.index', compact('roles'));
     }
 
-    public function create()
+    public function create(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('roles.create', [
             'applications' => Application::all(),
@@ -24,7 +24,7 @@ class RoleController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(): \Illuminate\Http\RedirectResponse
     {
         $data = request()->validate([
             'name' => 'required|string|unique:roles',
@@ -40,7 +40,7 @@ class RoleController extends Controller
         return redirect()->route('roles.index')->with('success', 'Role created successfully');
     }
 
-    public function show(Role $role)
+    public function show(Role $role): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('roles.show', [
             'role' => $role,
@@ -49,7 +49,7 @@ class RoleController extends Controller
         ]);
     }
 
-    public function update(Role $role)
+    public function update(Role $role): \Illuminate\Http\RedirectResponse
     {
         $data = request()->validate([
             'name' => 'required|string',

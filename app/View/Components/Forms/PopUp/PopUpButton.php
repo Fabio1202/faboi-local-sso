@@ -21,6 +21,7 @@ class PopUpButton extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
+    #[\Override]
     public function render()
     {
         return view('components.forms.pop-up.pop-up-button');

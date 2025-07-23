@@ -24,6 +24,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    #[\Override]
     public function boot()
     {
         Route::pattern(':route_variable', '[a-zA-Z-]{0,255}+');

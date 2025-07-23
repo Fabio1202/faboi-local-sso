@@ -15,8 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('permissions', function (Blueprint $table) {
-            $table->dropForeignIdFor(\App\Models\Application::class);
-            $table->dropColumn('application_id');
+            $table->dropConstrainedForeignId('application_id');
             $table->foreignId('permission_group_id')->change()->nullable(false);
         });
 
@@ -38,7 +37,7 @@ return new class extends Migration
                 'name' => 'view',
                 'description' => 'View the application',
             ]);
-            $role = Role::where('name', 'admin')->first();
+            $role = Role::where('name', 'Admin')->first();
             $role->permissions()->attach($permission);
             $application->save();
         });
