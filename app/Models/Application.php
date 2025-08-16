@@ -74,4 +74,20 @@ class Application extends Model
     {
         return $this->hasMany(\App\Models\PermissionGroup::class);
     }
+
+    public function getShortDescriptionAttribute(): ?string
+    {
+        // if description is longer than 100 characters, cut it and add '...' at the end
+        return strlen($this->description) > 100 ? substr($this->description, 0, 100).'...' : $this->description;
+    }
+
+    public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function clients(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\Client::class);
+    }
 }

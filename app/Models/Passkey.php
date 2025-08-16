@@ -17,4 +17,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at The timestamp when the passkey was last updated.
  * @property \App\Models\User $user The user associated with the passkey.
  */
-class Passkey extends Model {}
+class Passkey extends Model {
+    /**
+     * @return BelongsTo<\App\Models\User, $this>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+}

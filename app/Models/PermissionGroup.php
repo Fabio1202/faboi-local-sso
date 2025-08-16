@@ -29,6 +29,22 @@ class PermissionGroup extends Model
         'id',
     ];
 
+    protected $appends = [
+        'permission_group_unique_name',
+    ];
+
+    public function getPermissionGroupUniqueNameAttribute(): string
+    {
+        // Check if permission group is already loaded
+        $unload = ! $this->relationLoaded('permissionGroup');
+        $uniqueName = $this->permissionGroup->unique_name;
+        if ($unload) {
+            $this->unsetRelation('permissionGroup');
+        }
+
+        return $uniqueName;
+    }
+
     #[\Override]
     protected static function boot()
     {
@@ -44,5 +60,10 @@ class PermissionGroup extends Model
     public function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Models\Permission::class);
+    }
+
+    public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Application::class);
     }
 }
