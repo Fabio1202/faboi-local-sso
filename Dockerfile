@@ -47,7 +47,6 @@ WORKDIR /var/www
 COPY --chown=www-data:www-data . /var/www
 
 EXPOSE 8000
-VOLUME /var/www/.env
 VOLUME /var/www/storage
 
 # Execute /docker/setup.sh on container start
