@@ -49,7 +49,7 @@ COPY --chown=www-data:www-data . /var/www
 EXPOSE 8000
 VOLUME /var/www/storage
 
-RUN mkdir -p storage/framework/octane bootstrap/cache \
+RUN mkdir -p storage/framework/octane bootstrap/cache storage/logs \
     && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R ug+rwX storage bootstrap/cache
 
