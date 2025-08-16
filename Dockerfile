@@ -2,7 +2,7 @@ FROM node:20 AS node
 
 WORKDIR /app
 
-COPY package*.json vite.config.js tailwind.config.js postcss.config.cjs /app/
+COPY package*.json vite.config.js /app/
 COPY resources/ /app/resources/
 
 RUN mkdir -p /app/public
