@@ -49,8 +49,14 @@ COPY --chown=www-data:www-data . /var/www
 EXPOSE 8000
 VOLUME /var/www/storage
 
+RUN mkdir -p storage/framework/octane bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R ug+rwX storage bootstrap/cache
+
 # Execute /docker/setup.sh on container start
 COPY docker/setup.sh /usr/local/bin/setup
 RUN chmod +x /usr/local/bin/setup
+
+USER www-data
 
 ENTRYPOINT ["setup"]
