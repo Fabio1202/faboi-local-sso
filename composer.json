@@ -20,7 +20,7 @@
         "laravel/scout": "^10.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^3.4",
-        "faboi/openid-connect": "^1.1.0",
+        "faboi/openid-connect": "^1.1.1",
         "symfony/yaml": "^7.1",
         "web-auth/webauthn-lib": "^5.0",
         "web-auth/webauthn-stimulus": "^5.0",
