@@ -33,6 +33,9 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     nginx \
     cron \
+    autoconf \
+    pkg-config \
+    build-essential \
     && docker-php-ext-configure intl \
     && docker-php-ext-install \
     pdo \
@@ -40,7 +43,10 @@ RUN apt-get update && apt-get install -y \
     zip \
     pdo_mysql \
     intl \
-    pcntl
+    pcntl \
+    && pecl install -o -f redis \
+    && docker-php-ext-enable redis \
+    && rm -rf /tmp/pear
 
 WORKDIR /var/www
 
