@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     #[\Override]
     public function register()
     {
-        $this->app->singleton(AuthorizationViewResponse::class, fn ($view) => new SimpleViewResponse($view));
+
     }
 
     /**
@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         // Passport::hashClientSecrets();
+        Passport::viewPrefix('passport');
 
         // Register PasskeyService
         $this->app->singleton(\App\Services\Auth\PasskeyService::class, function () {
