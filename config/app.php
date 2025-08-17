@@ -183,6 +183,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         \App\Providers\FortifyServiceProvider::class,
         OpenIDConnect\Laravel\PassportServiceProvider::class,
+        \Laravel\Passport\PassportServiceProvider::class,
 
         /*
          * Package Service Providers...
