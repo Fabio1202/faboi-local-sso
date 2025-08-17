@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     #[\Override]
     public function register()
     {
-        $this->app->singleton(AuthorizationViewResponse::class, fn () => new SimpleViewResponse($view));
+        $this->app->singleton(AuthorizationViewResponse::class, fn ($view) => new SimpleViewResponse($view));
     }
 
     /**
