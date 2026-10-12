@@ -73,7 +73,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('registerLink');
 
         Route::get('/permissions', function () {
-            $application = Client::find(request()->get('client_id'))->application;
+            $application = Client::find(request()->input('client_id'))->application;
 
             return request()->user()->permissions($application);
         });

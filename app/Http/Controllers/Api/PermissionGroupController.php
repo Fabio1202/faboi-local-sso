@@ -20,7 +20,7 @@ class PermissionGroupController extends Controller
 
         return PermissionGroup::firstOrCreate([
             'application_id' => $application->id,
-            'name' => $request->get('name'),
+            'name' => $request->input('name'),
         ]);
     }
 

@@ -47,7 +47,7 @@ class UserController extends Controller
         $user = User::create($validated);
 
         // Get roles
-        $roles = request()->get('roles');
+        $roles = request()->input('roles');
         $user->roles()->attach($roles);
 
         // Redirect to users index
@@ -56,7 +56,7 @@ class UserController extends Controller
 
     public function activate(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
-        $user = User::where('uuid', request()->get('uuid'))->firstOrFail();
+        $user = User::where('uuid', request()->input('uuid'))->firstOrFail();
 
         return view('users.activate', [
             'user' => $user,
@@ -70,7 +70,7 @@ class UserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         try {
-            $user = User::where('uuid', Crypt::decryptString(request()->get('uuid')))->firstOrFail();
+            $user = User::where('uuid', Crypt::decryptString(request()->input('uuid')))->firstOrFail();
         } catch (DecryptException $e) {
             return back()->withErrors(['name' => 'Something sketchy is going on']);
         }
@@ -102,7 +102,7 @@ class UserController extends Controller
         $user->update($validated);
 
         // Get roles
-        $roles = request()->get('roles');
+        $roles = request()->input('roles');
         $user->roles()->sync($roles);
 
         // Redirect to users index
