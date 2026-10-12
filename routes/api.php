@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/permissions', function () {
         $user = request()->user();
-        $clientID = request()->get('client_id');
+        $clientID = request()->input('client_id');
         $client = \App\Models\Client::find($clientID);
         $application = $client->application;
         $permissions = $user->permissions($application);

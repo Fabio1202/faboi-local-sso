@@ -14,12 +14,12 @@ use Webauthn\AuthenticatorAttestationResponse;
 use Webauthn\AuthenticatorAttestationResponseValidator;
 use Webauthn\AuthenticatorSelectionCriteria;
 use Webauthn\CeremonyStep\CeremonyStepManagerFactory;
+use Webauthn\CredentialRecord;
 use Webauthn\Denormalizer\WebauthnSerializerFactory;
 use Webauthn\PublicKeyCredential;
 use Webauthn\PublicKeyCredentialCreationOptions;
 use Webauthn\PublicKeyCredentialRequestOptions;
 use Webauthn\PublicKeyCredentialRpEntity;
-use Webauthn\PublicKeyCredentialSource;
 use Webauthn\PublicKeyCredentialUserEntity;
 
 class PasskeyService
@@ -40,7 +40,7 @@ class PasskeyService
         $this->serializer = $factory->create();
 
         $csmFactory = new CeremonyStepManagerFactory;
-        $csmFactory->setSecuredRelyingPartyId(['localhost']);
+        $csmFactory->setAllowedOrigins([rtrim((string) config('app.url'), '/')]);
 
         $creationCSM = $csmFactory->creationCeremony();
         $requestCSM = $csmFactory->requestCeremony();
@@ -126,7 +126,7 @@ class PasskeyService
                 return json_encode(['success' => false]);
             }
             $key->keySource = $json;
-            $key->aaguid = request()->get('id');
+            $key->aaguid = request()->input('id');
             auth()->user()->passkeys()->save($key);
 
             // return $this->serializer->normalize($publicKeyCredentialSource);
@@ -168,9 +168,9 @@ class PasskeyService
         if ($publicKeyCredential->response instanceof AuthenticatorAssertionResponse) {
             $authenticatorAssertionResponse = $publicKeyCredential->response;
 
-            $passkey = Passkey::where('aaguid', request()->get('id'))->firstOrFail();
+            $passkey = Passkey::where('aaguid', request()->input('id'))->firstOrFail();
 
-            $originalKey = $this->serializer->denormalize(json_decode($passkey->keySource, associative: true), PublicKeyCredentialSource::class, 'json');
+            $originalKey = $this->serializer->denormalize(json_decode($passkey->keySource, associative: true), CredentialRecord::class, 'json');
 
             $publicKeyCredentialSource = $this->authenticatorAssertionResponseValidator->check(
                 $originalKey,

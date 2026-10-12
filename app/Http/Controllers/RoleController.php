@@ -33,9 +33,9 @@ class RoleController extends Controller
 
         $role = Role::create($data);
 
-        $role->permissions()->attach(request()->get('permissions'));
+        $role->permissions()->attach(request()->input('permissions'));
 
-        $role->users()->attach(request()->get('users'));
+        $role->users()->attach(request()->input('users'));
 
         return redirect()->route('roles.index')->with('success', 'Role created successfully');
     }
@@ -58,9 +58,9 @@ class RoleController extends Controller
 
         $role->update($data);
 
-        $role->permissions()->sync(request()->get('permissions'));
+        $role->permissions()->sync(request()->input('permissions'));
 
-        $role->users()->sync(request()->get('users'));
+        $role->users()->sync(request()->input('users'));
 
         return redirect()->route('roles.index')->with('success', 'Role updated successfully');
     }
